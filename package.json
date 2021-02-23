@@ -14,7 +14,9 @@
     "@nuxt/typescript-runtime": "^2.0.1",
     "@nuxtjs/axios": "^5.12.5",
     "core-js": "^3.8.3",
-    "nuxt": "^2.14.12"
+    "node-sass": "^5.0.0",
+    "nuxt": "^2.14.12",
+    "sass": "^1.32.4"
   },
   "devDependencies": {
     "@nuxt/types": "^2.14.12",
@@ -24,6 +26,8 @@
     "babel-eslint": "^10.1.0",
     "eslint": "^7.18.0",
     "eslint-plugin-nuxt": "^2.0.0",
-    "eslint-plugin-vue": "^7.5.0"
+    "eslint-plugin-vue": "^7.5.0",
+    "sass": "^1.32.4",
+    "sass-loader": "^10.1.1"
   }
 }

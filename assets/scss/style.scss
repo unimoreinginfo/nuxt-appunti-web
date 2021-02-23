@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;500;700&family=IBM+Plex+Sans:wght@300&family=Lobster&display=swap');
+@import 'partials/colors';
+@import 'partials/mixins';
+
+body{
+    margin: 0;
+    background: $white;
+}
+#navbar{
+    position: fixed;
+    width: 80%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    #desktop{
+        nav{
+            padding-right: 20px;
+            padding-left: 20px;
+            text-align: center;
+            font-size: 1em;
+            display: inline-block;
+            font-weight: normal;
+            cursor: pointer;
+            &.bright{
+                color: $white;
+            }
+        }
+    }
+    #logo{
+        font-family: 'DM Sans', sans-serif;
+        font-size: .95em;
+        padding-left: 20px;
+        &.bright{
+            color: $white;
+        }
+    }
+}
+.flexbox{
+    display: flex;
+    &.justify-between{
+        justify-content: space-between;
+    }
+    &.justify-center{
+        justify-content: center;
+    }
+    &.align-center{
+        align-items: center;
+    }
+}
+section{   
+    .container{
+        width: 80%;
+    }
+    &.full{
+        min-height: 100vh;
+        width: 100%;
+    }
+    &#main{
+        background: $blue;
+    }
+    h1, h2{
+        font-family: 'DM Sans', sans-serif;
+    }
+    h1{
+        &.main{
+            color: $white;
+            font-weight: lighter;
+            font-size: 5em;
+            margin: 0;
+        }
+    }
+    h2{
+        &.main{
+            font-family: 'IBM Plex Sans', sans-serif;
+            color: $white;
+            font-weight: lighter;
+            font-size: 1.5em;
+        }
+    }
+}
+form{
+    &.full-width{
+        width: 100%;
+    }
+    &.centered{
+        text-align: center;
+    }
+    input{
+        &.fancy{
+            margin-top: 20px;
+            outline: none;
+            width: calc(100% - 250px);
+            border: none;
+            height: 60px;
+            font-size: 1.15em;
+            font-family: 'IBM Plex Sans', sans-serif;
+            border-radius: 5px;
+            color: white;
+            text-indent: 20px;;
+            background: rgba(255,255,255,0.15);
+            @include placeholder{
+                color: rgba(255,255,255,0.78);
+            }
+        }
+    }
+}
