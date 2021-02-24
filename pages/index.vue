@@ -13,7 +13,7 @@
     </div>
     <section id="main" class="full flexbox justify-center align-center">
       <div class="container">
-        <div class="flexbox align-center">
+        <div class="flexbox align-center responsive">
             <div style="width: 70%;">
                 <h1 class="main" style="text-align: left">appunti.me</h1>
                 <h2 class="main" style="text-align: left;"> fatto da studenti, per gli studenti </h2>
@@ -113,3 +113,12 @@ export default Vue.extend({
     }
 })
 </script>
+
+<style>
+@media (max-width: 1000px) {
+  .responsive {
+    flex-direction: column;
+    padding-top: 10vh;
+  }
+} 
+</style>
