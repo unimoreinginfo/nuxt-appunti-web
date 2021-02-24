@@ -11,9 +11,15 @@
     "lint": "npm run lint:js"
   },
   "dependencies": {
+    "@fortawesome/free-brands-svg-icons": "^5.15.2",
+    "@fortawesome/free-solid-svg-icons": "^5.15.2",
     "@nuxt/typescript-runtime": "^2.0.1",
     "@nuxtjs/axios": "^5.12.5",
+    "@nuxtjs/fontawesome": "^1.1.2",
+    "@types/lodash": "^4.14.168",
     "core-js": "^3.8.3",
+    "gsap": "^3.6.0",
+    "lodash": "^4.17.21",
     "node-sass": "^5.0.0",
     "nuxt": "^2.14.12",
     "sass": "^1.32.4"

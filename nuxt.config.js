@@ -1,9 +1,9 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'nuxt-appunti-web',
+    title: 'appunti.me',
     htmlAttrs: {
-      lang: 'en'
+      lang: 'it'
     },
     meta: [
       { charset: 'utf-8' },
@@ -11,10 +11,9 @@ export default {
       { hid: 'description', name: 'description', content: '' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      // { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
-
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
   ],
@@ -35,9 +34,33 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/fontawesome'
   ],
-
+    fontawesome: {
+        component: 'fa',
+        icons: {
+            solid: [
+                'faBars',
+                'faArrowAltCircleRight',
+                'faArrowAltCircleLeft',
+                'faCity',
+                'faSign',
+                'faChevronDown',
+                'faChevronLeft',
+                'faTimes',
+                'faEuroSign',
+                'faGreaterThanEqual',
+                'faLessThanEqual',
+                'faBath',
+                'faSync',
+                'faCogs',
+                'faSearch',
+                'faMapMarkerAlt',
+                'faMapPin'
+            ]
+        }
+    },
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},
 
