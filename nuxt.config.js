@@ -1,4 +1,5 @@
 export default {
+  buildDir: 'beta.appunti.me',
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'appunti.me',
@@ -41,23 +42,7 @@ export default {
         component: 'fa',
         icons: {
             solid: [
-                'faBars',
-                'faArrowAltCircleRight',
-                'faArrowAltCircleLeft',
-                'faCity',
-                'faSign',
                 'faChevronDown',
-                'faChevronLeft',
-                'faTimes',
-                'faEuroSign',
-                'faGreaterThanEqual',
-                'faLessThanEqual',
-                'faBath',
-                'faSync',
-                'faCogs',
-                'faSearch',
-                'faMapMarkerAlt',
-                'faMapPin'
             ]
         }
     },

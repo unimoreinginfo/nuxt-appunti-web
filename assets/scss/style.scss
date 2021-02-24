@@ -57,9 +57,15 @@ section{
     .box{
         padding-left: 40px;
         padding-right: 40px;
+        &::-webkit-scrollbar {
+                width: 5px;
+            }
+            &::-webkit-scrollbar-thumb {
+                background-color: $white;
+            }
         .item{
             padding: 20px;
-            height: 75px;
+            min-height: 75px;
             position: relative;
             &:before{
                 position: absolute;
@@ -76,6 +82,11 @@ section{
                 font-family: 'IBM Plex Sans', sans-serif;
                 font-weight: lighter;
                 font-size: .89em;
+                a{
+                    color: white;
+                    text-decoration: none;
+                    border-bottom: 1px solid $white;
+                }
             }
             &.bright{
                 color: $white;
@@ -155,3 +166,5 @@ form{
         }
     }
 }
+
+@import 'responsive.scss';

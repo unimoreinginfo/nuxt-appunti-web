@@ -8,7 +8,7 @@
         <div class="desktop-selector-holder" :id="item_id">  
             <ul>
                 <input class="fancy" type="text" v-if="filter" autocomplete="none" :placeholder="input_placeholder" style="text-indent: 20px;" v-model="search" :id="`${item_id}_input`">
-                <li v-for="(item, i) in filteredList" :key="i" @click="selected_value = item.value; selected_text = item.name; toggle(); onClick()">
+                <li v-for="(item, i) in filteredList" :key="i" @click="selected_value = item.id; selected_text = `${item.name.trim().substring(0, 19)}${(item.name.length > 19) ? '...' : ''}`; toggle(); onClick()">
                     {{ item.name }}
                 </li>
             </ul>
@@ -129,7 +129,7 @@
         transform: translateY(-15px);
         pointer-events: none;
         ul{ 
-            max-height: 450px;
+            max-height: 250px;
             overflow-y: auto;
             overflow-x: hidden;
             

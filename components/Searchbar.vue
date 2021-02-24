@@ -1,14 +1,16 @@
 <template>
     <div :id="$props.id" :style="$props.outerStyle">
         <input type="text" :placeholder="$props.placeholder" :class="$props.model" @input="search()" v-model="query">
-        <transition-group name="list" tag="ul" class="result-holder">
-            <li v-for="result in items" :key="result.id" :class="['result', 'flexbox align-center', $props.resultModel]">
-                <div style="text-align: left;">
-                    <h2> {{ result.title }} </h2>
-                    <span> {{ result.author }} </span>
-                </div>
+        <ul class="result-holder">
+            <li v-for="result in items" :key="result.id" :class="['result', $props.resultModel]">
+                <a class='flexbox align-center' :href="result.url" style="color: inherit; text-decoration: none; width: 100%; height: 100%;">
+                    <div style="text-align: left; ">
+                        <h2> {{ result.title }} </h2>
+                        <span v-if="!result.hide_author"> di {{ result.name }} {{result.surname}} </span>
+                    </div>
+                </a>
             </li>
-        </transition-group>
+        </ul>
     </div>
 </template>
 <script lang="ts">
@@ -37,13 +39,24 @@ export default Vue.extend({
         async search(){
 
             // debounce implementation molto veloce
+            if(this.query == '')
+                this.items = []
 
             clearTimeout(this.time)
 
             this.time = setTimeout(async() => {
-                if(!this.$props.disableResults)
+                if(!this.$props.disableResults){
                     this.items = await this.searchFunction();
+                    console.log(this.items);
+                    
+                    if(!this.items.length)
+                        this.items.push({ title: 'Nessun risultato trovato :(', hide_author: true })
+                    else
+                        this.items.push({ title: 'Clicca per visualizzare altri risultati', url: `/search?q=${this.query}`, hide_author: true })
+                    
+                }
                 else await this.searchFunction();
+                
             }, 500)
 
         }
@@ -88,6 +101,20 @@ export default Vue.extend({
             &.bright{
                 color: $white;
                 border-bottom: 5px solid rgba(0,0,0,0.07);
+            }
+        }
+    }
+
+    @media screen and (max-width: 768px){
+        .result-holder{
+            max-height: 200px;
+            .result{
+                h2{
+                    font-size: 1.05em;
+                }
+                span{
+                    font-size: .8em;
+                }
             }
         }
     }
