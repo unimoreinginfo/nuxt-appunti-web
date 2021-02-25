@@ -16,6 +16,20 @@ export default {
         }
 
     },
+    async getNote(id: string, subject_id: number){
+
+        try{
+            
+            let response = await client.get(`/notes/${subject_id}/${id}?translate_subjects=true`);
+            return response.data.result;
+
+        }catch(err){
+
+            throw err;
+
+        }
+
+    },
     async searchNotes(query: string, subject_id?: number){
 
         try{

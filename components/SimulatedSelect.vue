@@ -18,8 +18,10 @@
 <script lang="ts">
 
     import Vue from 'vue'
-    import { Power2, TimelineMax } from 'gsap'
+    import gsap, { Power2, TimelineMax, CSSPlugin } from 'gsap'
     // import { Property } from '@/lib/types';
+
+    gsap.registerPlugin(CSSPlugin)
 
     const backup = () => { return; };
 

@@ -1,16 +1,5 @@
 <template>
   <div> 
-    <div id="navbar" class="flexbox justify-between">
-      <span id="logo" class="bright">
-        appunti.me
-      </span>
-      <div id="desktop">
-        <nav class="bright">home</nav>
-        <nav class="bright">materie disponibili</nav>
-        <nav class="bright"><b>segnala un bug!</b></nav>
-        <nav class="bright">login</nav>
-      </div>
-    </div>
     <section id="main" class="full flexbox justify-center align-center">
       <div class="container">
         <div class="flexbox align-center">
@@ -27,11 +16,13 @@
             <div class="box" style="flex: 1; height: 70vh; overflow: auto;" id="latest">
                 <h2 class="main"> Ultimi caricamenti </h2>
                 <div v-for="item in latest" :key="item.id" class="item bright flexbox align-center">
-                    <div>
-                        <h2> {{ item.title }} </h2>
-                        <span> {{ item.subject_name }} </span>
-                        <span style="font-size: .75em"> di <a :href="`/author/${item.author_id}`">{{ item.name }} {{ item.surname }}</a> </span>
-                    </div>
+                    <a :href="`/item/${item.subject_id}/${item.note_id}`" style="text-decoration: none; color: inherit;">
+                        <div>
+                            <h2> {{ item.title }} </h2>
+                            <span> {{ item.subject_name }} </span>
+                            <span style="font-size: .75em"> di <a :href="`/author/${item.author_id}`">{{ item.name }} {{ item.surname }}</a> </span>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>

@@ -6,7 +6,7 @@
                 <a class='flexbox align-center' :href="result.url" style="color: inherit; text-decoration: none; width: 100%; height: 100%;">
                     <div style="text-align: left; ">
                         <h2> {{ result.title }} </h2>
-                        <span v-if="!result.hide_author"> di {{ result.name }} {{result.surname}} </span>
+                        <span v-if="!result.hide_author"> di <a class="normal" :href="`/author/${result.author_id}`">{{ result.name }} {{result.surname}}</a> </span>
                     </div>
                 </a>
             </li>
@@ -57,7 +57,7 @@ export default Vue.extend({
                 }
                 else await this.searchFunction();
                 
-            }, 500)
+            }, (this.$props.disableTimeout) ? 500 : 1)
 
         }
     }
