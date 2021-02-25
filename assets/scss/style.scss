@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;500;700&family=IBM+Plex+Sans:wght@300&family=Lobster&display=swap');
 @import 'partials/colors';
 @import 'partials/mixins';
+@import '~balloon-css/src/balloon';
 
 body{
     margin: 0;
@@ -67,6 +68,13 @@ section{
             border-bottom: 1px solid $white;
         }
     }
+    .author-image{
+        height: 150px;
+        width: 150px;
+        background: $white;
+        border-radius: 100px;
+        box-shadow: 0 14px 28px rgba(0,0,0,0.05), 0 10px 10px rgba(0,0,0,0.07);
+    }
     .box{
         padding-left: 40px;
         padding-right: 40px;
@@ -127,6 +135,7 @@ section{
         color: $white;
     }
     ul{
+        font-family: 'IBM Plex Sans';
         &.fancy-list{
             padding: 0;
             list-style: none;
@@ -137,9 +146,13 @@ section{
                 font-family: 'DM Sans', sans-serif;
                 color: $white;
                 .icon{
+                    position: relative;
+                    z-index: 1;
                     padding: 10px;
                     background: $white;
                     color: $blue;
+                    display: inline-block;
+                    margin: 5px;
                     border-radius: 5px;
                     box-shadow: 0 14px 28px rgba(0,0,0,0.05), 0 10px 10px rgba(0,0,0,0.07);
                     transition: .25s all ease-in-out;
@@ -173,9 +186,9 @@ section{
         }
     }
     h2{
+        color: $white;
         &.main{
             font-family: 'IBM Plex Sans', sans-serif;
-            color: $white;
             font-weight: lighter;
             font-size: 1.5em;
         }

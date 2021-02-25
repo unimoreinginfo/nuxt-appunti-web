@@ -1,6 +1,7 @@
 import axios, { AxiosInstance } from 'axios';
 import subjects from './subjects';
 import notes from './notes';
+import users from './users';
 
 export default axios.create({
     baseURL: 'https://api.appunti.me'
@@ -8,6 +9,6 @@ export default axios.create({
 
 export const methods = {
 
-    subjects, notes
+    subjects, notes, users
 
 }

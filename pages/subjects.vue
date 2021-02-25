@@ -4,12 +4,14 @@
             <h1 class="main"> Materie disponibili </h1>
             <h2 class="main"> Lista di materie disponibili su appunti.me (in aggiornamento) </h2>
             <form>
-                <Searchbar ref="searchbar" model="fancy full-width" id="filter" placeholder="Filtra materie" :searchAction="filter" :disable-results="true" :disable-timeout="true" outer-style="width: 100%; margin: 0 auto;" result-model="bright h100 hover-darken-blue" />
+                <Searchbar ref="searchbar" model="fancy full-width" id="filter" placeholder="Filtra materie" :searchAction="filter" :disable-results="true" :timeout="false" outer-style="width: 100%; margin: 0 auto;" result-model="bright h100 hover-darken-blue" />
             </form>
             <div class="flexbox align-top justify-center wrap" style="margin-top: 80px; width: 100%; margin-left: -20px;">
-                <div v-for="subject in filtered" :key="subject.id" class="box flexbox align-center justify-center" style="margin: 20px; width: 23.3%; height: 250px; background: rgba(255,255,255,0.9); color: #2f3542; border-radius: 10px;">
-                    <h1 class="dark" style="text-align: center;"> {{ subject.name }} </h1>
-                </div>
+                <a v-for="subject in filtered" :key="subject.id" :href="`/subject/${subject.id}`" style="margin: 20px; width: 23.3%;">
+                    <div class="box flexbox align-center justify-center" style="height: 250px; background: rgba(255,255,255,0.9); color: #2f3542; border-radius: 10px;">
+                        <h1 class="dark" style="text-align: center; font-size: 2em;"> {{ subject.name }} </h1>
+                    </div>
+                </a>
             </div>
         </div>
     </section>
@@ -45,3 +47,12 @@ export default Vue.extend({
     }
 })
 </script>
+<style lang="scss" scoped>
+    .box{
+        transition: .25s all ease-in-out;
+        &:hover{
+            transform: translateY(-10px);
+            box-shadow: 0 14px 28px rgba(0,0,0,0.15), 0 10px 10px rgba(0,0,0,0.17);
+        }
+    }
+</style>

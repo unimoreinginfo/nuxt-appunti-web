@@ -52,7 +52,10 @@ export default {
         icons: {
             solid: [
                 'faChevronDown',
-                'faDownload'
+                'faDownload',
+                'faUser',
+                'faSignInAlt',
+                'faCheckSquare'
             ]
         }
     },

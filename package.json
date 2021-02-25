@@ -17,6 +17,7 @@
     "@nuxtjs/axios": "^5.12.5",
     "@nuxtjs/fontawesome": "^1.1.2",
     "@types/lodash": "^4.14.168",
+    "balloon-css": "^1.2.0",
     "core-js": "^3.8.3",
     "gsap": "^3.6.0",
     "lodash": "^4.17.21",

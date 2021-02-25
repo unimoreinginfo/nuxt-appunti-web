@@ -1,7 +1,7 @@
 <template>
     <div :id="$props.id" :style="$props.outerStyle">
         <input type="text" :placeholder="$props.placeholder" :class="$props.model" @input="search()" v-model="query">
-        <ul class="result-holder">
+        <ul class="result-holder" :class=[$props.resultHolderModel]>
             <li v-for="result in items" :key="result.id" :class="['result', $props.resultModel]">
                 <a class='flexbox align-center' :href="result.url" style="color: inherit; text-decoration: none; width: 100%; height: 100%;">
                     <div style="text-align: left; ">
@@ -25,7 +25,9 @@ export default Vue.extend({
         searchAction: Function,
         outerStyle: String,
         resultModel: String,
-        disableResults: Boolean
+        disableResults: Boolean,
+        resultHolderModel: String,
+        timeout: Boolean
     },
     data(){
         return {
@@ -43,6 +45,8 @@ export default Vue.extend({
                 this.items = []
 
             clearTimeout(this.time)
+            console.log(this.$props.disableTimeout);
+            
 
             this.time = setTimeout(async() => {
                 if(!this.$props.disableResults){
@@ -57,7 +61,7 @@ export default Vue.extend({
                 }
                 else await this.searchFunction();
                 
-            }, (this.$props.disableTimeout) ? 500 : 1)
+            }, (this.$props.timeout) ? 500 : 1)
 
         }
     }
@@ -71,6 +75,9 @@ export default Vue.extend({
         padding: 0;
         margin: 0 auto;
         max-height: 400px;
+        &.absolute{
+            position: absolute;
+        }
         width: 100%;
         overflow: auto;
         margin-top: 5px;

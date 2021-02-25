@@ -30,11 +30,13 @@ export default {
         }
 
     },
-    async searchNotes(query: string, subject_id?: number){
+    async searchNotes(query: string, subject_id?: number, author_id?: string){
 
         try{
             
-            let response = await client.get(`/notes/search?q=${query}&subject_id=${subject_id}`);
+            console.log(author_id);
+            
+            let response = await client.get(`/notes/search?q=${query}&subject_id=${subject_id ? subject_id : 'any'}&author_id=${author_id || ""}`);
             return response.data.result;
 
         }catch(err){
