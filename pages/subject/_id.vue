@@ -2,8 +2,8 @@
     <section>
         <div class="container" style="margin: 0 auto; margin-top: 120px;">
             <div style="position: sticky; top: 80px; background: #5352ed; z-index: 2;">
-                <h1 class="main"> {{ subject.name }} </h1>
-                <h2 class="main"> Docente: {{ subject.professor_name }} {{ subject.professor_surname }} </h2>
+                <h1 class="main" id="title"> {{ subject.name }} </h1>
+                <h2 class="main" id="subtitle"> Docente: {{ subject.professor_name }} {{ subject.professor_surname }} </h2>
                 <form>
                     <Searchbar ref="searchbar" model="fancy full-width" id="filter" :placeholder="`Cerca appunti per ${subject.name}`" :searchAction="filter" :disable-results="false" :timeout="true" outer-style="width: 100%; margin: 0 auto;" result-model="bright h100 hover-darken-blue" />
                 </form>
@@ -18,12 +18,12 @@
             <div style="width: 100%; margin-top: -50px;">
                     <ul class="fancy-list" style="width: 100%;">
                         <li v-for="note in notes" :key="note.id">
-                            <div class="flexbox justify-between align-center" style="min-height: 50px;">
-                                <div>
-                                    <span> {{ note.title }} </span><br>
+                            <div class="flexbox justify-between align-center" style="min-height: 50px; overflow-x: hidden;">
+                                <div style="width: 85%;">
+                                    <span style="display: inline-block;"> {{ note.title }} </span><br>
                                     <span style="font-family: 'IBM Plex Sans', sans-serif; font-size: .89em;"> di {{ note.name }} {{ note.surname }} </span>
                                 </div>
-                                <div>
+                                <div style="width: 15%; text-align: right;">
                                     <a :href="`/author/${note.author_id}`">
                                         <div class="icon" :aria-label="`Visualizza gli appunti di ${note.name} ${note.surname}`" data-balloon-pos="left">
                                             <fa icon="user" />
@@ -97,6 +97,17 @@ export default Vue.extend({
         &:hover{
             transform: translateY(-10px);
             box-shadow: 0 14px 28px rgba(0,0,0,0.15), 0 10px 10px rgba(0,0,0,0.17);
+        }
+    }
+    @media screen and (max-width: 500px){
+        #subject_name{
+            font-size: 1.5em;
+        }
+        #title{
+            font-size: 3em;
+        }
+        #subtitle{
+            font-size: 1.25em;
         }
     }
 </style>

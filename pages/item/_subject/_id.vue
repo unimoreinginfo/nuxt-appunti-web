@@ -1,18 +1,20 @@
 <template>
     <section>
         <div class="container" style="margin: 0 auto; margin-top: 120px;">
-            <h1><a :href="`/subject/${item.info.subject_id}`"><span style="border-bottom: 3px solid white;">{{ item.info.subject_name }}</span>  </a></h1>
-            <h1 class="main"> {{ item.info.title }} </h1>
-            <h2 class="main"> di <a class="normal" :href="`/author/${item.info.author_id}`">{{ item.info.name }} {{ item.info.surname }}</a>, caricato il {{ date }} alle {{ time }} </h2>
+            <h1 id="subject_name"><a :href="`/subject/${item.info.subject_id}`"><span style="border-bottom: 3px solid white;">{{ item.info.subject_name }}</span>  </a></h1>
+            <h1 class="main" id="title"> {{ item.info.title }} </h1>
+            <h2 class="main" id="subtitle"> di <a class="normal" :href="`/author/${item.info.author_id}`">{{ item.info.name }} {{ item.info.surname }}</a>, caricato il {{ date }} alle {{ time }} </h2>
             <div class="flexbox align-top">
-                <div style="width: 60%;">
+                <div style="width: 60%;" id="enlarge">
                     <ul class="fancy-list" style="width: 100%;">
                         <li v-for="file in item.files" :key="file">
                             <div class="flexbox justify-between align-center">
                                 <span> {{ file }} </span>
-                                <div class="icon">
-                                    <fa icon="download" />
-                                </div>
+                                <a :href="`https://api.appunti.me/${item.info.storage_url}/${file}`">
+                                    <div class="icon">
+                                        <fa icon="download" />
+                                    </div>
+                                </a>
                             </div>
                         </li>
                     </ul>
@@ -42,3 +44,24 @@ export default Vue.extend({
     }
 })
 </script>
+<style lang="scss" scoped>
+    #subject_name{
+        font-size: 5vw;
+    }
+    @media screen and (max-width: 900px){
+        #enlarge{
+            width: 100% !important;
+        }
+    }
+    @media screen and (max-width: 500px){
+        #subject_name{
+            font-size: 1.5em;
+        }
+        #title{
+            font-size: 3em;
+        }
+        #subtitle{
+            font-size: 1.25em;
+        }
+    }
+</style>

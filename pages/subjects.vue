@@ -1,13 +1,13 @@
 <template>
     <section>
         <div class="container" style="margin: 0 auto; margin-top: 120px;">
-            <h1 class="main"> Materie disponibili </h1>
-            <h2 class="main"> Lista di materie disponibili su appunti.me (in aggiornamento) </h2>
+            <h1 class="main" id="title"> Materie disponibili </h1>
+            <h2 class="main" id="subtitle"> Lista di materie disponibili su appunti.me (in aggiornamento) </h2>
             <form>
                 <Searchbar ref="searchbar" model="fancy full-width" id="filter" placeholder="Filtra materie" :searchAction="filter" :disable-results="true" :timeout="false" outer-style="width: 100%; margin: 0 auto;" result-model="bright h100 hover-darken-blue" />
             </form>
-            <div class="flexbox align-top justify-center wrap" style="margin-top: 80px; width: 100%; margin-left: -20px;">
-                <a v-for="subject in filtered" :key="subject.id" :href="`/subject/${subject.id}`" style="margin: 20px; width: 23.3%;">
+            <div class="flexbox align-top justify-center wrap" style="margin-top: 80px; width: 100%;">
+                <a v-for="subject in filtered" :key="subject.id" :href="`/subject/${subject.id}`" class="robo" style="margin: 20px; width: 300px">
                     <div class="box flexbox align-center justify-center" style="height: 250px; background: rgba(255,255,255,0.9); color: #2f3542; border-radius: 10px;">
                         <h1 class="dark" style="text-align: center; font-size: 2em;"> {{ subject.name }} </h1>
                     </div>
@@ -53,6 +53,22 @@ export default Vue.extend({
         &:hover{
             transform: translateY(-10px);
             box-shadow: 0 14px 28px rgba(0,0,0,0.15), 0 10px 10px rgba(0,0,0,0.17);
+        }
+    }
+    @media screen and (max-width: 768px){
+        .robo{
+            width: 100% !important;
+        }
+    }
+    @media screen and (max-width: 500px){
+        #subject_name{
+            font-size: 1.5em;
+        }
+        #title{
+            font-size: 3em;
+        }
+        #subtitle{
+            font-size: 1.25em;
         }
     }
 </style>

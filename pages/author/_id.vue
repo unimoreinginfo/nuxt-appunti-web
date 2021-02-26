@@ -2,16 +2,16 @@
     <section>
         <div class="container" style="margin: 0 auto; margin-top: 120px;">
             <div style="position: sticky; top: 80px; background: #5352ed; z-index: 2;">
-                <div class="flexbox justify-between">
-                    <div class="flexbox">
+                <div class="flexbox justify-between" style="overflow-x: hidden;">
+                    <div class="flexbox align-center" style="margin-bottom: 20px;">
                         <div class="author-image" :style="`background: url('${author.image}'); background-size: cover; background-repeat: no-repeat; position: relative;`">
                             <fa v-if="!author.image" icon="user" style="position: absolute; color: #fefefe; bottom: 0; top: 0; left: 0; right: 0; margin: auto; transform: scale(5); "/>
                         </div>
                         <div style="margin-left: 40px;">
                             <h2 class="bright">{{ author.name }} {{ author.surname }} <span aria-label="Utente verificato!" data-balloon-pos="up"><fa icon="check-square" v-if="author.verified" style="transform: scale(0.7)" /></span></h2>
-                            <ul style="padding: 0; list-style-type: none; color: #fefefe;">
+                            <!--<ul style="padding: 0; list-style-type: none; color: #fefefe;">
                                 <li> <a class="normal" v-html="mail"></a> </li>
-                            </ul>
+                            </ul>-->
                         </div>
                     </div>
                 </div>
@@ -29,7 +29,7 @@
             <div style="width: 100%; margin-top: -50px;">
                     <ul class="fancy-list" style="width: 100%;">
                         <li v-for="note in notes" :key="note.id">
-                            <div class="flexbox justify-between align-center" style="min-height: 50px;">
+                            <div class="flexbox justify-between align-center" style="min-height: 50px; overflow-x: hidden;">
                                 <div>
                                     <span> {{ note.title }} </span><br>
                                     <span style="font-family: 'IBM Plex Sans', sans-serif; font-size: .89em;"> {{ note.subject_name }} </span><br>

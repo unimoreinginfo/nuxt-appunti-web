@@ -20,6 +20,8 @@ body{
     padding-top: 30px;
     padding-bottom: 30px;
     font-family: 'IBM Plex Sans', sans-serif;
+    background: $blue;
+    z-index: 200;
     #desktop{
         nav{
             padding-right: 20px;

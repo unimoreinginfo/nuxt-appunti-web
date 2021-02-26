@@ -21,13 +21,15 @@
         h1.main, h2.main{
             text-align: center !important;
         }
+        width: 100% !important;
+    }
+    section{
         h1.main{
             font-size: 12.5vw;
         }
         h2.main{
             font-size: 4vw;
         }
-        width: 100% !important;
     }
 }
 @media screen and (max-width: 500px){
