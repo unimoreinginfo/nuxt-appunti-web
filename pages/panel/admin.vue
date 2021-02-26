@@ -46,7 +46,7 @@ export default Vue.extend({
 
         try {
 
-            var notesData = await methods.notes.get('&order_by=date&translate_subjects=true', 1, true);
+            var notesData = await methods.notes.get('&order_by=date&translate_subjects=true', 1);
             items.notes = notesData.result;
             items.notePages = notesData.pages;
 
