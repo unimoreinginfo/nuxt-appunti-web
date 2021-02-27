@@ -1,5 +1,4 @@
-import commit from 'vuex';
-import auth from '@/lib/api/auth';
+import { methods } from '@/lib/api';
 
 export const state = () => ({
     auth: {
@@ -24,8 +23,7 @@ export const mutations = {
 }
 
 export const actions = {
-    async logIn({ commit }, data: any) {
-        commit('setAuth', auth.logIn(data.email, data.password));
-        console.log("action");
+    async logIn({ commit }: any, data: any) {
+        commit('setAuth', methods.auth.logIn(data.email, data.password));
     }
 }

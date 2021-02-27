@@ -1,4 +1,4 @@
-import axios, { AxiosInstance } from 'axios';
+import axios from 'axios';
 import subjects from './subjects';
 import notes from './notes';
 import users from './users';
@@ -13,3 +13,5 @@ export const methods = {
     subjects, notes, users, auth
 
 }
+
+console.log(methods);
