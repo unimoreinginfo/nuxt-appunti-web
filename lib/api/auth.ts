@@ -2,7 +2,7 @@ import client from './index';
 
 export default {
     
-    async signUp(email: string, password: string, name: string, surname: string, unimore_id: string) {
+    async signup(email: string, password: string, name: string, surname: string, unimore_id: string) {
         try{
             
             let response = await client.post(`/auth/signup`, {
@@ -21,7 +21,7 @@ export default {
 
         }
     },
-    async logIn(email: string, password: string) {
+    async login(email: string, password: string) {
         try{
             
             let response = await client.post(`/auth/login`, {
@@ -29,7 +29,7 @@ export default {
                 password: password,
             });
 
-            return {token: response.data.auth_token, refTokenExpiry: response.data.refresh_token_expiry};
+            return response.data.auth_token;
 
         }catch(err){
 

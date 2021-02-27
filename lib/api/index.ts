@@ -4,14 +4,14 @@ import notes from './notes';
 import users from './users';
 import auth from './auth';
 
-export default axios.create({
+const client = axios.create({
     baseURL: 'https://api.appunti.me'
-})
+});
+
+export default client;
 
 export const methods = {
 
     subjects, notes, users, auth
 
 }
-
-console.log(methods);

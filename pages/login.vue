@@ -2,7 +2,7 @@
     <section>
         <div class="container" style="margin: 0 auto; margin-top: 120px;">
             <h1 class="main" id="title"> accedi </h1>
-            <form @submit.prevent="logIn">
+            <form @submit.prevent="login">
                 <div class="flexbox align-top wrap" style="margin-top: 80px; width: 100%; flex-direction: column;align-content: center">
                     <input class="fancy" placeholder="email" type="text" style="width:50%" v-model="email">
                     <span v-if="!inputsValid.email" style="color: red">Email non valida</span>
@@ -18,6 +18,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import utils from '@/lib/utils';
+import { methods } from '@/lib/api'
 
 export default Vue.extend({
     data() {
@@ -29,21 +30,30 @@ export default Vue.extend({
             }
         }
     },
-    created() {
-        // TODO:check if logged in and go to the right panel
-    },
+
     methods: {
 
-        logIn() {
+        login() {
 
             this.validateForm();
-            if(this.$data.inputsValid && this.$data.inputsValid)
-                this.$store.dispatch('logIn', {email: this.$data.email, password: this.$data.password});
+            if(this.$data.inputsValid && this.$data.inputsValid){
+                methods.auth.login(this.$data.email, this.$data.password)
+                    .then(token => {
+
+                        console.log(token);
+                        localStorage.setItem('token', token);
+
+                    }).catch(err => {
+
+                        console.log(err);
+
+                    })
+            }            
 
         },
         validateForm() {
             
-            this.$data.inputsValid = utils.validateInputs(this.$data.email, this.$data.password); // Y U NO WORK TypeError: Cannot read property 'validateInputs' of undefined
+            this.$data.inputsValid = utils.validateInputs(this.$data.email, this.$data.password);
         
         }
     }
