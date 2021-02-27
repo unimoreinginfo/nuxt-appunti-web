@@ -1,16 +1,17 @@
 <template>
   <div> 
     <section id="main" class="full flexbox justify-center align-center">
-      <div class="container">
-        <div class="flexbox align-center justify-center">
-            <div style="text-align: center;">
-                <form @submit.prevent="edit">
-                  <SimulatedSelect ref="select_subject" right-icon="chevron-down" placeholder="Seleziona materia" data-id="select1" :items="getSubjects" />
-                  <input type="text" class="fancy" v-model="item.info.title" placeholder="Titolo appunto">
-                  <button class="fancy">Modifica</button>                 
+      <div class="container" style="align-center justify-center">
+            <div style="text-align: center;width:80%;margin-left:auto;margin-right:auto">
+                <form @submit.prevent="editNote" >
+                  <div class="flexbox" style="flex-direction:column;">
+                    <SimulatedSelect ref="select_subject" right-icon="chevron-down" placeholder="Seleziona materia" data-id="select1" :items="getSubjects" style=";margin-left:auto;margin-right:auto" />
+                    <input type="text" class="fancy" v-model="item.info.title" placeholder="Titolo appunto" style="margin-top:30px"> 
+                    <button class="fancy" style="margin-top:25px;width:20%;margin-left:auto;margin-right:auto">Modifica</button>
+                  </div>
                 </form>
+                <button :v-on="deleteNote" class="fancy del" style="margin-top:25px;width:20%;margin-left:auto;margin-right:auto">Elimina</button>
             </div>
-        </div>
       </div>
     </section>
   </div>
@@ -36,8 +37,11 @@ export default Vue.extend({
         }
     },
     methods: {
-        async edit() {
-
+        async deleteNote() {
+          console.log("appunto eliminato");
+        },
+        async editNote() {
+          console.log("appunto modificato");
         },
         async getSubjects(){
             

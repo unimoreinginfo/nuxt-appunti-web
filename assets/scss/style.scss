@@ -235,19 +235,29 @@ form{
             &.full-width{ width: 100%; }
         }
     }
-    button {
-        &.fancy{
-            color: white;
-            background-color: rgba(255,255,255,0.08);
-            font-size: medium;
-            border-radius: 15px;
-            border-width: 0px;
-            outline-style: none;
-            padding: 15px;
-            &:hover{
-                background-color: rgba(255,255,255,0.12);
-            }
+    
+}
+
+button {
+    
+        color: white;
+        background-color: rgba(255,255,255,0.08);
+        font-size: medium;
+        border-radius: 15px;
+        border-width: 0px;
+        outline-style: none;
+        padding: 15px;
+        &:hover{
+            background-color: rgba(255,255,255,0.12);
         }
+        &.fancy{
+            &.del{
+                background-color: #FF0000;
+                &:hover{
+                    background-color: #FF3333;
+                }
+            }
+    
     }
 }
 
