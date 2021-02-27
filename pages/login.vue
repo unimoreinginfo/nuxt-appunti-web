@@ -4,6 +4,7 @@
             <h1 class="main" id="title"> accedi </h1>
             <form @submit.prevent="login">
                 <div class="flexbox align-top wrap" style="margin-top: 80px; width: 100%; flex-direction: column;align-content: center">
+                    <span v-if="loginFailed" style="color: red">Combinazione email e password sbagliata</span>
                     <input class="fancy" placeholder="email" type="text" style="width:50%" v-model="email">
                     <span v-if="!inputsValid.email" style="color: red">Email non valida</span>
                     <input class="fancy" placeholder="password" type="password" style="margin-top:50px;width:50%" v-model="password">
@@ -27,7 +28,8 @@ export default Vue.extend({
             password: "",
             inputsValid: {
                 email: true, password: true
-            }
+            },
+            loginFailed: false
         }
     },
 
@@ -36,15 +38,18 @@ export default Vue.extend({
         login() {
 
             this.validateForm();
-            if(this.$data.inputsValid && this.$data.inputsValid){
+            if(this.$data.inputsValid.email && this.$data.inputsValid.password){
                 methods.auth.login(this.$data.email, this.$data.password)
                     .then(token => {
 
                         console.log(token);
+                        this.$data.loginFailed = false;
                         localStorage.setItem('token', token);
+                        let to = this.$route.query.to || "/panel/admin";
+                        this.$router.push(to);
 
                     }).catch(err => {
-
+                        this.$data.loginFailed = true;
                         console.log(err);
 
                     })

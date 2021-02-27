@@ -2,24 +2,26 @@ import client from "../lib/api";
 
 let token_set = false;
 let route_auth = {
-    "index": true
+    "panel-admin": true,
+    "panel-editNote-subject-id": true,
+    "panel-editUser-id": true
 }
 
 export default({ app }) => {
 
     app.router.beforeEach(async(to, from, next) => {
-
+        console.log(to.name);
         if(!route_auth[to.name])
             return next();
 
         let token = localStorage.getItem("token");
 
         if(!token)
-            return app.router.push('/login');
+            return app.router.push(`/login?to=${to.path}`);
 
         if(!token_set){
             console.log("setting token");
-            client.defaults["headers"]["Authorization"] = `Bearer ${window.localStorage.getItem("token")}`;
+            client.defaults.headers.common["Authorization"] = `Bearer ${window.localStorage.getItem("token")}`;
             token_set = true;
         }
 
@@ -30,7 +32,7 @@ export default({ app }) => {
 
         }catch(err){
 
-            app.router.push('/login')
+            app.router.push(`/login?to=${to.path}`)
 
         }
 

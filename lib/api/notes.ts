@@ -2,12 +2,12 @@ import client from './index'
 
 export default {
 
-    async get(query: string, page: number = 1){
+    async get(query: string, page: number = 1, returnPageNumber: boolean = false){
 
         try{
             
             let response = await client.get(`/notes?page=${page}${query}`);
-            return response.data.result;
+            return returnPageNumber ? response.data : response.data.result;
 
         }catch(err){
 

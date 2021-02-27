@@ -6,19 +6,19 @@
             <div style="width: 50%;" id="notes">
                 <h1>Appunti</h1>
                 <div v-for="item in notes" :key="item.id" class="item bright flexbox">
-                    <a :href="`/item/${item.subject_id}/${item.note_id}`" style="text-decoration: none; color: inherit;">
+                    <a :href="`/panel/editNote/${item.subject_id}/${item.note_id}`" style="text-decoration: none; color: inherit;">
                         <div>
                             <h2> {{ item.title }} </h2>
                             <span> {{ item.subject_name }} </span>
-                            <span style="font-size: .75em"> di <a :href="`/author/${item.author_id}`">{{ item.name }} {{ item.surname }}</a> </span>
+                            <span style="font-size: .75em"> di {{ item.name }} {{ item.surname }} </span>
                         </div>
                     </a>
                 </div>
             </div>
-            <div class="box" style="flex: 1; overflow: auto;margin-left:30px" id="users">
+            <div style="margin-left:30px" id="users">
                 <h1>Utenti</h1>
                 <div v-for="item in users" :key="item.id" class="item bright flexbox">
-                    <a :href="`/editUser/${item.id}`" style="text-decoration: none; color: inherit;">
+                    <a :href="`/panel/editUser/${item.id}`" style="text-decoration: none; color: inherit;">
                         <div>
                             <h2> {{ item.name }} {{ item.surname }} </h2>
                         </div>
@@ -46,16 +46,15 @@ export default Vue.extend({
 
         try {
 
-            var notesData = await methods.notes.get('&order_by=date&translate_subjects=true', 1);
+            var notesData = await methods.notes.get('&order_by=date&translate_subjects=true', 1, true);
             items.notes = notesData.result;
             items.notePages = notesData.pages;
 
-            var usersData = await methods.users.getPage(1, this.$store.state.auth.token, true);    
+            var usersData = await methods.users.getPage(1, true);    
             items.users = usersData.result;
             items.userPages = usersData.pages;
             // TODO:scrolling infinito
         } catch(err) {
-
             console.log(err);
 
         }finally{
