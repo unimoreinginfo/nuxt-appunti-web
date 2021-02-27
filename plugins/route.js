@@ -1,7 +1,7 @@
-import client from "../lib/api";
+import client, { methods } from "../lib/api";
 
-let token_set = false;
 let route_auth = {
+    "panel": true,
     "panel-admin": true,
     "panel-editNote-subject-id": true,
     "panel-editUser-id": true
@@ -10,28 +10,24 @@ let route_auth = {
 export default({ app, store }) => {
 
     app.router.beforeEach(async(to, from, next) => {
-        console.log(to.name);
-        if(!route_auth[to.name])
-            return next();
 
         let token = localStorage.getItem("token");
 
         if(!token)
             return app.router.push(`/login?to=${to.path}`);
 
-        if(!token_set){
-            console.log("setting token");
-            store.commit('setAuth', token);
-            token_set = true;
-        }
+        store.commit('setAuth', token);
 
         try{
+            
+            let user = await methods.auth.user();
+            store.commit('setUser', user);
 
-            await client.get('/auth/user');
             next();
 
         }catch(err){
             
+            console.log("client verification error");
             store.commit('notLogged', false);
             app.router.push(`/login?to=${to.path}`)
 

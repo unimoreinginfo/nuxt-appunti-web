@@ -4,7 +4,8 @@ export const state = () => ({
     auth: {
         token: null,
         is_logged: false
-    }
+    },
+    user: {} as any // non mi va
 })
 
 export const getters = {
@@ -16,14 +17,24 @@ export const getters = {
     }
 }
 export const mutations = {
+
     setAuth(s: any, token: any){
+
         s.auth.token = token;
-        s.auth.is_logged = true;
         client.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
+    },
+    setUser(s: any, user: any){
+
+        s.user = user;
+        s.auth.is_logged = true;
+
     },
     notLogged(s: any) {
+
         s.auth.token = null;
         s.auth.is_logged = false;
+
     }
 }
 

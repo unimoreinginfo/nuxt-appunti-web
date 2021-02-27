@@ -32,13 +32,13 @@ export default Vue.extend({
             loginFailed: false
         }
     },
-    created(){
+    mounted(){
 
         let token = this.$store.getters.getToken;
         console.log(`token: ${token}`);
         if(!token)
             return;
-
+        
         if(this.$store.getters.isLogged)
             return this.$router.push('/panel');
 
@@ -54,16 +54,23 @@ export default Vue.extend({
             this.validateForm();
             if(this.$data.inputsValid.email && this.$data.inputsValid.password){
                 methods.auth.login(this.$data.email, this.$data.password)
-                    .then(token => {
-
-                        console.log(token);
+                    .then(info => {
+                        
+                        console.log(info);
+                        localStorage.setItem('token', info.auth_token);
+                        this.$store.commit('setAuth', info.auth_token);
+                        
+                        console.log(this.$store.getters.getToken);
+                        
+                        /* console.log(token);
                         this.$data.loginFailed = false;
                         localStorage.setItem('token', token);
                         this.$store.commit('setAuth', token);
-                        let to = this.$route.query.to || "/panel/admin";
-                        this.$router.push(to as string);
+                        let to = this.$route.query.to || "/panel";
+                        this.$router.push(to as string);*/
 
                     }).catch(err => {
+
                         this.$data.loginFailed = true;
                         console.log(err);
 

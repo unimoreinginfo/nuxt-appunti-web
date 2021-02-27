@@ -2,13 +2,13 @@ import client from './index';
 
 export default {
     
-    async getUser(){
+    async user(){
     
         // client should be logged
 
         try{
 
-            let response = await client.post('/auth/user');
+            let response = await client.get('/auth/user');
 
             return response.data.result;
 
@@ -46,7 +46,7 @@ export default {
                 password: password,
             });
 
-            return response.data.auth_token;
+            return { ...response.data };
 
         }catch(err){
 
