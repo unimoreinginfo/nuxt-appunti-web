@@ -6,6 +6,7 @@
    "content_security_policy": "default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' https://apis.google.com https://feedback.googleusercontent.com https://www.google.com https://www.gstatic.com; child-src https://accounts.google.com https://content.googleapis.com https://www.google.com; connect-src 'self' http://*:* https://*:*; font-src https://fonts.gstatic.com; object-src 'self';",
    "default_locale": "en",
    "description": "Provider for discovery and services for mirroring of Chrome Media Router",
+   "differential_fingerprint": "1.e31b8a902f1388c1e92520ef18a94a8d491de9c0f2e7598f8ad1775544ff3182",
    "externally_connectable": {
       "ids": [ "idmofbkcelhplfjnmmdolenpigiiiecc", "ggedfkijiiammpnbdadhllnehapomdge", "njjegkblellcjnakomndbaloifhcoccg" ]
    },
