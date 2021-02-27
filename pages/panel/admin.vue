@@ -35,7 +35,10 @@ import Vue from 'vue'
 import { methods } from '@/lib/api';
 
 export default Vue.extend({
-    async asyncData(){
+    data(){
+        items: []
+    },
+    async created(){
 
         let items = {
             notes: [],
@@ -55,11 +58,12 @@ export default Vue.extend({
             items.userPages = usersData.pages;
             // TODO:scrolling infinito
         } catch(err) {
+
             console.log(err);
 
         }finally{
 
-            return items;
+            this.$data.items = items;
 
         }
 

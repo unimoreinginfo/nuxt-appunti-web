@@ -31,7 +31,8 @@ export default({ app, store }) => {
             next();
 
         }catch(err){
-
+            
+            store.commit('notLogged', false);
             app.router.push(`/login?to=${to.path}`)
 
         }

@@ -32,7 +32,17 @@ export default Vue.extend({
             loginFailed: false
         }
     },
+    created(){
 
+        let token = this.$store.getters.getToken;
+        console.log(`token: ${token}`);
+        if(!token)
+            return;
+
+        if(this.$store.getters.isLogged)
+            return this.$router.push('/panel');
+
+    },
     methods: {
 
         login() {

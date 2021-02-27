@@ -2,6 +2,23 @@ import client from './index';
 
 export default {
     
+    async getUser(){
+    
+        // client should be logged
+
+        try{
+
+            let response = await client.post('/auth/user');
+
+            return response.data.result;
+
+        }catch(err){
+
+            throw err;
+
+        }
+
+    },
     async signup(email: string, password: string, name: string, surname: string, unimore_id: string) {
         try{
             
