@@ -44,7 +44,11 @@ export default Vue.extend({
 
     },
     methods: {
-
+        validateForm() {
+            
+            this.$data.inputsValid = utils.validateInputs(this.$data.email, this.$data.password);
+        
+        },
         login() {
 
             this.validateForm();
@@ -66,11 +70,6 @@ export default Vue.extend({
                     })
             }            
 
-        },
-        validateForm() {
-            
-            this.$data.inputsValid = utils.validateInputs(this.$data.email, this.$data.password);
-        
         }
     }
 })
