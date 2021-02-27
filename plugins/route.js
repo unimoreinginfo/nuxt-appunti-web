@@ -7,7 +7,7 @@ let route_auth = {
     "panel-editUser-id": true
 }
 
-export default({ app }) => {
+export default({ app, store }) => {
 
     app.router.beforeEach(async(to, from, next) => {
         console.log(to.name);
@@ -21,7 +21,7 @@ export default({ app }) => {
 
         if(!token_set){
             console.log("setting token");
-            client.defaults.headers.common["Authorization"] = `Bearer ${window.localStorage.getItem("token")}`;
+            store.commit('setAuth', token);
             token_set = true;
         }
 

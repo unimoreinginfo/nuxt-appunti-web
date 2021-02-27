@@ -45,6 +45,7 @@ export default Vue.extend({
                         console.log(token);
                         this.$data.loginFailed = false;
                         localStorage.setItem('token', token);
+                        this.$store.commit('setAuth', token);
                         let to = this.$route.query.to || "/panel/admin";
                         this.$router.push(to as string);
 
