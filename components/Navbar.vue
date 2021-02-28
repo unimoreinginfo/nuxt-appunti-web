@@ -25,3 +25,52 @@
     </div>
   </div>
 </template>
+<script lang="ts">
+import Vue from 'vue'
+import { TimelineMax, Power2 } from 'gsap';
+export default Vue.extend({
+    data(){
+        return {
+            timeline: new TimelineMax({ paused: true })
+        }
+    },
+    methods: {
+
+        toggleMenu(){
+
+            if(this.timeline.reversed())
+                this.timeline.play();
+            else this.timeline.reverse();
+
+        }
+
+    },
+    mounted(){
+        this.timeline.to('.bar.first', {
+            duration: .25,
+            ease: Power2.easeInOut,
+            transform: 'rotate(45deg) translateY(6px)'
+        })
+        this.timeline.to('.bar.second', {
+            duration: .25,
+            ease: Power2.easeInOut,
+            transform: 'rotate(-45deg) translateY(-6px)'
+        }, 0)
+        this.timeline.to('#mobile-menu', {
+            duration: .5,
+            ease: Power2.easeInOut,
+            left: 0
+        })
+        this.timeline.to('#mobile-menu li', {
+            duration: .5,
+            opacity: 1,
+            ease: Power2.easeOut,
+            transform: 'translateY(0)',
+            stagger: .1
+        })
+        // this.timeline.to('.')
+
+        this.timeline.reversed(true);
+    }
+})
+</script>
