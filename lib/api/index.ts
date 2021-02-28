@@ -5,7 +5,8 @@ import users from './users';
 import auth from './auth';
 
 const client = axios.create({
-    baseURL: 'https://api.appunti.me'
+    baseURL: 'https://api.appunti.me',
+    withCredentials: true
 });
 
 export default client;

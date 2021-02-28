@@ -27,7 +27,8 @@ export default Vue.extend({
         resultModel: String,
         disableResults: Boolean,
         resultHolderModel: String,
-        timeout: Boolean
+        timeout: Boolean,
+        disableMore: Boolean
     },
     data(){
         return {
@@ -51,11 +52,15 @@ export default Vue.extend({
             this.time = setTimeout(async() => {
                 if(!this.$props.disableResults){
                     this.items = await this.searchFunction();
-                    console.log(this.items);
                     
                     if(!this.items.length)
-                        this.items.push({ title: 'Nessun risultato trovato :(', hide_author: true })
-                    else
+                        return this.items.push({ title: 'Nessun risultato trovato :(', hide_author: true })
+
+                    this.items.forEach((item: any) => {
+                        item["url"] = `/item/${item.subject_id}/${item.id}`;
+                    })
+
+                    if(!this.disableMore)
                         this.items.push({ title: 'Clicca per visualizzare altri risultati', url: `/search?q=${this.query}`, hide_author: true })
                     
                 }
@@ -75,6 +80,7 @@ export default Vue.extend({
         padding: 0;
         margin: 0 auto;
         max-height: 400px;
+        background: $blue;
         &.absolute{
             position: absolute;
         }

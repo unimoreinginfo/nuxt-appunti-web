@@ -45,9 +45,6 @@ export default Vue.extend({
 })
 </script>
 <style lang="scss" scoped>
-    #subject_name{
-        font-size: 5vw;
-    }
     @media screen and (max-width: 900px){
         #enlarge{
             width: 100% !important;
@@ -56,6 +53,9 @@ export default Vue.extend({
     @media screen and (max-width: 500px){
         #subject_name{
             font-size: 1.5em;
+        }
+        #subject_name{
+            font-size: 5vw;
         }
         #title{
             font-size: 3em;

@@ -58,7 +58,11 @@ export default {
                 'faDownload',
                 'faUser',
                 'faSignInAlt',
-                'faCheckSquare'
+                'faCheckSquare',
+                'faListAlt',
+                'faUpload',
+                'faEdit',
+                'faCog'
             ]
         }
     },

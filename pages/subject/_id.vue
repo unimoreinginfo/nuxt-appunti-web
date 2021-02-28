@@ -5,7 +5,7 @@
                 <h1 class="main" id="title"> {{ subject.name }} </h1>
                 <h2 class="main" id="subtitle"> Docente: {{ subject.professor_name }} {{ subject.professor_surname }} </h2>
                 <form>
-                    <Searchbar ref="searchbar" model="fancy full-width" id="filter" :placeholder="`Cerca appunti per ${subject.name}`" :searchAction="filter" :disable-results="false" :timeout="true" outer-style="width: 100%; margin: 0 auto;" result-model="bright h100 hover-darken-blue" />
+                    <Searchbar ref="searchbar" model="fancy full-width" id="filter" :placeholder="`Cerca appunti per ${subject.name}`" :searchAction="filter" :disable-results="false" :timeout="true" outer-style="width: 100%; margin: 0 auto;" result-model="bright h100 hover-darken-blue" :disable-more="true" result-holder-model="absolute" />
                 </form>
             </div>
             <div class="flexbox align-top justify-center wrap" style="margin-top: 80px; width: 100%; margin-left: -20px;">
@@ -15,7 +15,7 @@
                     </div>
                 </a>
             </div>
-            <div style="width: 100%; margin-top: -50px;">
+            <div style="width: 100%; margin-top: -100px;">
                     <ul class="fancy-list" style="width: 100%;">
                         <li v-for="note in notes" :key="note.id">
                             <div class="flexbox justify-between align-center" style="min-height: 50px; overflow-x: hidden;">

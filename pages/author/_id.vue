@@ -26,7 +26,7 @@
                     </div>
                 </a>
             </div>
-            <div style="width: 100%; margin-top: -50px;">
+            <div style="width: 100%; margin-top: -100px;">
                     <ul class="fancy-list" style="width: 100%;">
                         <li v-for="note in notes" :key="note.id">
                             <div class="flexbox justify-between align-center" style="min-height: 50px; overflow-x: hidden;">

@@ -13,9 +13,7 @@ export default({ app, store }) => {
 
         let token = localStorage.getItem("token");
 
-        if(!token)
-            return app.router.push(`/login?to=${to.path}`);
-
+        if (!token && route_auth[to.name]) return app.router.push(`/login?to=${to.path}`);
         store.commit('setAuth', token);
 
         try{
@@ -27,9 +25,13 @@ export default({ app, store }) => {
 
         }catch(err){
             
-            console.log("client verification error");
+            console.log(`client verification failed with code ${err}`);
             store.commit('notLogged', false);
-            app.router.push(`/login?to=${to.path}`)
+            
+            if (to.name != 'login' && route_auth[to.name])
+                app.router.push(`/login?to=${to.path}`)
+            
+            next();
 
         }
 

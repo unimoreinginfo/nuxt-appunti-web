@@ -1,21 +1,22 @@
 <template>
-    <section id="main" class="full flexbox justify-center">
-      <div class="container" style="margin-top:100px;margin-bottom:50px;color:white">
-          <h1> Benvenuto/a! </h1>
-      </div>
+    <section id="main">
+        <h1 class="main" style="margin: 0;"> Ciao, {{ $store.getters.getUser.name }} </h1>
     </section>
 </template>
 <script lang="ts">
 import Vue from 'vue'
-import { methods } from '@/lib/api';
 
 export default Vue.extend({
+    layout: 'panel',
     data(){
         return {
-            
             items: []
-
         }
+    },
+    created(){
+
+        console.log(this.$store);
+        
     },
     methods: {
     },

@@ -23,13 +23,26 @@
             <li><a href="/panel" v-if="$store.getters.isLogged"><nav class="bright"><b>il tuo profilo</b></nav></a></li>
         </ul>
     </div>
-    <Nuxt />
+    <div id="panel-layout" class="flexbox align-top justify-between" style="width: 80%; margin: 0 auto; margin-top: 120px">
+        <div id="panel-sidebar">
+            <ul class="fancy-list noborder ibm">
+                <a href="/panel"><li><fa icon="list-alt" class="right" /> Riepilogo</li> </a>
+                <a href="/panel/upload"><li> <fa icon="upload" class="right" /> Carica appunti </li></a>
+                <a href="/panel/edit"><li> <fa icon="edit" class="right" /> Modifica appunti</li></a> 
+                <a href="/panel/settings"><li> <fa icon="cog" class="right" /> Impostazioni profilo </li></a>
+            </ul>
+        </div>
+        <Nuxt style="flex: 1; margin-left: 30px;" />
+    </div>
   </div>
 </template>
 
 <style lang="scss">
 
     @import '@/assets/scss/style.scss';
+    #panel-sidebar{
+        width: 250px;
+    }
     #mobile-toggle{
         display: none;
         width: 25px;

@@ -117,7 +117,7 @@
         svg{
             position: absolute;
             right: 10px;
-            top: 50%;
+            top: 30%;
             color: $white;
         }
     }

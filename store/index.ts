@@ -5,7 +5,8 @@ export const state = () => ({
         token: null,
         is_logged: false
     },
-    user: {} as any // non mi va
+    user: {} as any, // non mi va,
+    uninitialized: true
 })
 
 export const getters = {
@@ -14,6 +15,9 @@ export const getters = {
     },
     isLogged(s: any){
         return s.auth.is_logged;
+    },
+    getUser(s: any){
+        return s.user;
     }
 }
 export const mutations = {
@@ -22,6 +26,7 @@ export const mutations = {
 
         s.auth.token = token;
         client.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+        s.uninitialized = false;
 
     },
     setUser(s: any, user: any){
@@ -34,6 +39,7 @@ export const mutations = {
 
         s.auth.token = null;
         s.auth.is_logged = false;
+        localStorage.clear();
 
     }
 }
