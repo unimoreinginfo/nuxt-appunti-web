@@ -41,6 +41,9 @@ export default Vue.extend({
             return this.$router.push('/panel');
         
     },
+    beforeDestroy(){
+
+    },
     methods: {
         login(){
             if(!this.$data.email || !this.$data.password){
