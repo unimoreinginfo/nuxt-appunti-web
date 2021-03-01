@@ -49,6 +49,19 @@ let methods = {
 
             }
         }
+    },
+    notes: {
+        async edit(oldSub, id, newSub, newTitle) {
+            try {
+                await client.post(`/notes/${oldSub}/${id}`, {
+                    title: newTitle,
+                    new_subject_id: newSub
+                });
+
+            } catch(err) {
+                throw err;
+            }
+        }
     }
 }
 

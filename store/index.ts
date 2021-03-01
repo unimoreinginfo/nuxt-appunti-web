@@ -9,6 +9,7 @@ export const state = () => ({
     secured_routes: {
         "panel": true,
         "panel-admin": true,
+        "panel-edit": true,
         "panel-editNote-subject-id": true,
         "panel-editUser-id": true
     }
