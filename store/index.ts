@@ -1,34 +1,38 @@
-import client, { methods } from '@/lib/api';
-
 export const state = () => ({
     auth: {
         token: null,
+        ref_token: null,
         is_logged: false
     },
     user: {} as any, // non mi va,
-    uninitialized: true
+    uninitialized: true,
+    secured_routes: {
+        "panel": true,
+        "panel-admin": true,
+        "panel-editNote-subject-id": true,
+        "panel-editUser-id": true
+    }
 })
 
 export const getters = {
     getToken(s: any){
         return s.auth.token;
     },
+    getRefToken(s: any){
+        return s.auth.ref_token;
+    },
     isLogged(s: any){
         return s.auth.is_logged;
     },
     getUser(s: any){
         return s.user;
+    },
+    getSecuredRoutes(s: any){
+        return s.secured_routes;
     }
 }
 export const mutations = {
 
-    setAuth(s: any, token: any){
-
-        s.auth.token = token;
-        client.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-        s.uninitialized = false;
-
-    },
     setUser(s: any, user: any){
 
         s.user = user;
@@ -37,17 +41,16 @@ export const mutations = {
     },
     notLogged(s: any) {
 
-        s.auth.token = null;
+        s.user = null;
         s.auth.is_logged = false;
-        localStorage.clear();
+        s.auth.token = null;
+        s.auth.ref_token = null;
 
-    }
-}
+    },
+    setAuth(s: any, data: any){
 
-export const actions = {
-    async login({ commit }: any, data: any) {
+        s.auth.token = data.auth_token;
+        s.auth.ref_token = data.ref_token; // ci serve sta roba sul client
 
-        commit('setAuth', await methods.auth.login(data.email, data.password));
-    
     }
 }

@@ -6,8 +6,9 @@
             <ul class="fancy-list noborder ibm">
                 <a href="/panel"><li><fa icon="list-alt" class="right" /> Riepilogo</li> </a>
                 <a href="/panel/upload"><li> <fa icon="upload" class="right" /> Carica appunti </li></a>
-                <a href="/panel/edit"><li> <fa icon="edit" class="right" /> Modifica appunti</li></a> 
+                <a href="/panel/edit"><li> <fa icon="edit" class="right" /> Lista completa appunti</li></a> 
                 <a href="/panel/settings"><li> <fa icon="cog" class="right" /> Impostazioni profilo </li></a>
+                <li @click="logout"> <fa icon="sign-out-alt" class="right" /> Logout </li>
             </ul>
         </div>
         <Nuxt style="flex: 1; margin-left: 30px;" />
@@ -71,6 +72,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { TimelineMax, Power2 } from 'gsap';
+import { methods } from '@/lib/api'
 
 export default Vue.extend({
     data(){
@@ -86,7 +88,14 @@ export default Vue.extend({
                 this.timeline.play();
             else this.timeline.reverse();
 
-        }
+        },
+        logout(){
+
+            methods.clearCookies();
+            this.$store.commit('notLogged')
+            this.$router.push('/');
+
+        },
 
     },
     mounted(){

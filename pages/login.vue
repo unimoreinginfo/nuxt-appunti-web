@@ -11,7 +11,6 @@
                     </div>
                 </form>
             </div>
-        </div>
     </section>
 </template>
 <script lang="ts">
@@ -36,13 +35,7 @@ export default Vue.extend({
         }
     },
     mounted(){
-       
-        if(this.$store.getters.isLogged)
-            return this.$router.push('/panel');
         
-    },
-    beforeDestroy(){
-
     },
     methods: {
         login(){
@@ -50,17 +43,15 @@ export default Vue.extend({
                 this.$data.message = 'Tutti i campi sono necessari';
                 return;
             }
-            methods.auth.login(this.email, this.$data.password)
-                .then(info => {
-                        
-                    console.log(info);
-                    localStorage.setItem('token', info.auth_token);
-                    this.$store.commit('setAuth', info.auth_token);
-                        
-                    let to = this.$route.query.to || "/panel";
-                    this.$router.push(to as string);
+            (this as any).$api.methods.auth.login(this.email, this.$data.password)
+                .then(async(info: any) => {
 
-                }).catch(err => {
+                    await methods.bridgeCookies(info.auth_token, info.refresh_token);
+                    
+                    let to = this.$route.query.to || "/panel";
+                    location.href = to;
+                    
+                }).catch((err: any) => {
 
                     this.$data.message = 'Credenziali errate'
                     console.log(err);

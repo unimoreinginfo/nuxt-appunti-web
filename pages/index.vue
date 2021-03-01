@@ -51,7 +51,7 @@ export default Vue.extend({
 
         }catch(err){
 
-            console.log(err); // aaa
+            console.log(err);
 
         }finally{
 
@@ -65,8 +65,6 @@ export default Vue.extend({
 
             let query = (this as any).$refs.searchbar.query,
                 subject = (this as any).$refs.select_subject.selected_value;
-
-            console.log(query, subject);
             
             try{
                 

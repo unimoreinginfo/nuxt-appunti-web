@@ -80,12 +80,21 @@ section{
     .box{
         padding-left: 40px;
         padding-right: 40px;
+        &.bright{
+            background: $white;
+        }
+        &.rounded{
+            border-radius: 10px;
+        }
+        &.bordered{
+            border-bottom: 2px solid $white;
+        }
         &::-webkit-scrollbar {
-                width: 5px;
-            }
-            &::-webkit-scrollbar-thumb {
-                background-color: $white;
-            }
+            width: 5px;
+        }
+        &::-webkit-scrollbar-thumb {
+            background-color: $white;
+        }
         .item{
             padding: 20px;
             min-height: 75px;
@@ -131,6 +140,11 @@ section{
     }
     h1, h2{
         font-family: 'DM Sans', sans-serif;
+    }
+    h3{
+        font-family: 'IBM Plex Sans', sans-serif;
+        color: $white;
+        font-weight: bolder;
     }
     p{
         font-family: 'IBM Plex Sans', sans-serif;
@@ -248,7 +262,7 @@ form{
             font-size: 1.15em;
             font-family: 'IBM Plex Sans', sans-serif;
             color: white;
-            text-indent: 20px;;
+            text-indent: 20px;
             background: rgba(255,255,255,0.15);
             box-shadow: 0 14px 28px rgba(0,0,0,0.05), 0 10px 10px rgba(0,0,0,0.07);
             @include placeholder{
@@ -274,6 +288,9 @@ form{
             padding: 15px;
             max-width: 200px;
             width: 100%;
+            &.del{
+                background: red;
+            }
             span{
                 font-family: 'DM Sans', sans-serif;
                 position: relative;

@@ -30,12 +30,12 @@
             "left-icon": String,
             "right-icon": String,
             placeholder: String,
-            title: String,
             items: {},
             dataId: String,
             filtering: {},
             "input-placeholder": String,
-            clicked: Function
+            clicked: Function,
+            default: {} // qualsiasi roba
         },
         data(){
             return {
@@ -44,7 +44,6 @@
                 place: this.$props["placeholder"] || "",
                 item_id: this.$props["dataId"] || "",
                 toggled: false,
-                sel_title: this.$props["title"],
                 list: this.$props["items"],
                 items_list: [] as Array<any>,
                 selected_value: null,
@@ -81,8 +80,6 @@
             }
         },
         async mounted(){
-        
-            console.log(`loading ${this.title}`);
 
             this.timeline.to(`.desktop-selector-holder#${this.item_id}`, {
                         opacity: 1,
@@ -96,7 +93,6 @@
                 throw new Error('must supply item id')
 
             console.log(this.$props.filtering);
-            
 
             if(typeof this.list == 'object'){
                 if(Array.isArray(this.list))
@@ -106,6 +102,23 @@
             else if(typeof this.list == 'function')
                 this.items_list = await this.list();
             else throw new Error('invalid list object')
+
+            if(this.$props.default){
+                
+                console.log(this.items_list);
+                
+                this.items_list.forEach((item: any) => {
+
+                    if(this.$props.default == item.id){
+
+                        this.selected_text = item.name;
+                        this.selected_value = item.id;
+
+                    }
+
+                })
+                
+            }
         }
     })
 </script>

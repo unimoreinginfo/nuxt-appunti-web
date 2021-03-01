@@ -1,31 +1,41 @@
 <template>
-  <div> 
-    <section id="main" class="full flexbox justify-center align-center">
-      <div class="container" style="align-center justify-center">
-            <div style="text-align: center;width:80%;margin-left:auto;margin-right:auto">
-                <form @submit.prevent="editNote" >
-                  <div class="flexbox" style="flex-direction:column;">
-                    <SimulatedSelect ref="select_subject" right-icon="chevron-down" placeholder="Seleziona materia" data-id="select1" :items="getSubjects" style=";margin-left:auto;margin-right:auto" />
-                    <input type="text" class="fancy" v-model="item.info.title" placeholder="Titolo appunto" style="margin-top:30px"> 
-                    <button class="fancy" style="margin-top:25px;width:20%;margin-left:auto;margin-right:auto">Modifica</button>
-                  </div>
-                </form>
-                <button :v-on="deleteNote" class="fancy del" style="margin-top:25px;width:20%;margin-left:auto;margin-right:auto">Elimina</button>
+    <client-only>
+        <!-- TODO: (anche da backend) aggiungere route per modificare e/o aggiungere file -->
+        <section id="main" class="full">
+                <h1> Modifica post </h1>
+                <div class="container" style="align-center">
+                <div style="width:100%;margin-left:auto;margin-right:auto">
+                    <form @submit.prevent="editNote" >
+                        <div class="flexbox" style="flex-direction:column;">
+                            <SimulatedSelect :default="item.info.subject_id" ref="select_subject" right-icon="chevron-down" placeholder="Seleziona materia" data-id="select1" :items="getSubjects" style=";margin-left:auto;margin-right:auto" />
+                            <input type="text" class="fancy" v-model="item.info.title" placeholder="Titolo appunto" style="margin-top:30px"> 
+                            <div class="flexbox justify-center" style="margin-top: 20px;">
+                                <button class="fancy" style="margin-right: 10px;"><span>Modifica</span></button>
+                                <button v-on="deleteNote" class="fancy del" style="margin-left: 10px;"><span>Elimina</span></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
-      </div>
-    </section>
-  </div>
+       </section>
+  </client-only>
 </template>
 <script lang="ts">
 import Vue from 'vue'
 import { methods } from '@/lib/api';
 
 export default Vue.extend({
+
+    layout: 'panel',
     async asyncData({ params }){
         try{
 
             let item = await methods.notes.getNote(params.id, parseInt(params.subject)),
                 date = new Date(item.info.uploaded_at);
+            
+            console.log(item.info);
+            
+            
             return { item, date: date.toLocaleDateString(), time: date.toLocaleTimeString() }
 
         }catch(err){

@@ -31,7 +31,7 @@ export default {
     // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
     plugins: [
         {
-            src: '~/plugins/route.js', ssr: false, mode: 'client'
+            src: '~/plugins/client.js', ssr: false, mode: 'client'
         }
     ],
 
@@ -47,8 +47,8 @@ export default {
     // Modules: https://go.nuxtjs.dev/config-modules
     modules: [
         // https://go.nuxtjs.dev/axios
-        '@nuxtjs/axios',
-        '@nuxtjs/fontawesome'
+        '@nuxtjs/fontawesome',
+        'cookie-universal-nuxt'
     ],
     fontawesome: {
         component: 'fa',
@@ -62,7 +62,8 @@ export default {
                 'faListAlt',
                 'faUpload',
                 'faEdit',
-                'faCog'
+                'faCog',
+                'faSignOutAlt'
             ]
         }
     },
@@ -71,5 +72,12 @@ export default {
 
     // Build Configuration: https://go.nuxtjs.dev/config-build
     build: {
-    }
+    },
+    router: {
+        middleware: ['authenticated']
+    },
+    serverMiddleware: [{
+        path: '/bridge',
+        handler: '~/bridge'
+    }]
 }

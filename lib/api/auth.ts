@@ -8,12 +8,12 @@ export default {
 
         try{
 
-            let response = await client.get('/auth/user');
+            let response = await client.get('/auth/user', { withCredentials: true });
 
             return response.data.result;
 
         }catch(err){
-
+            
             throw err;
 
         }
@@ -31,22 +31,6 @@ export default {
             });
 
             return response.data.success;
-
-        }catch(err){
-
-            throw err;
-
-        }
-    },
-    async login(email: string, password: string) {
-        try{
-            
-            let response = await client.post(`/auth/login`, {
-                email: email,
-                password: password,
-            });
-
-            return { ...response.data };
 
         }catch(err){
 
