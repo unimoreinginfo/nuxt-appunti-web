@@ -61,6 +61,20 @@ let methods = {
             } catch(err) {
                 throw err;
             }
+        },
+        async get(query, page = 1, returnPageNumber = false) {
+
+            try {
+
+                let response = await client.get(`/notes?page=${page}${query}`);
+                return returnPageNumber ? response.data : response.data.result;
+
+            } catch (err) {
+
+                throw err;
+
+            }
+
         }
     }
 }

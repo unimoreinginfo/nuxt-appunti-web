@@ -52,7 +52,7 @@ export default Vue.extend({
 
         try{
             
-            let latest_items = await methods.notes.get(`&author_id=${this.$store.getters.getUser.id}&order_by=date`, 1);   
+            let latest_items = await (this as any).$api.methods.notes.get(`&author_id=${this.$store.getters.getUser.id}&order_by=date`, 1);   
             this.latest_items = latest_items;
 
             let size = await (this as any).$api.methods.user.size();
