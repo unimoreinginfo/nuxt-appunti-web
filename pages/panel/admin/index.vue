@@ -1,18 +1,16 @@
 <template>
     <section id="main">
         <Loading ref="spinner" />
-        <h1 class="main" style="margin: 0;"> Ciao, {{ name }} </h1>
-        
-        <ul style="width:200px" v-if="userIsAdmin" class="fancy-list noborder"><a href="/panel/admin"><li>vai al pannello admin</li> </a></ul>
-        <h2> Ecco un veloce riepilogo </h2>
-        <div class="flexbox align-top" style="margin-top: 50px; width: 100%;">
-            <div style="margin-right: 40px; width: 70%;">
+        <h1 class="main" style="margin: 0;"> Pannello admin </h1>
+        <div class="flexbox align-top">
+            <div style="margin-right: 40px">
                 <h3> Ultimi appunti caricati </h3>
                 <ul class="fancy-list">
                     <li v-for="note in latest_items" :key="note.id">
                         <div class="flexbox justify-between align-center" style="min-height: 50px; overflow-x: hidden;">
                                 <div style="width: 85%;">
                                     <span style="display: inline-block;"> {{ note.title }} </span><br>
+                                    <span style="font-family: 'IBM Plex Sans', sans-serif; font-size: .89em;"> di <b>{{ note.name }} {{ note.surname }}</b> </span><br>
                                     <span style="font-family: 'IBM Plex Sans', sans-serif; font-size: .89em;"> {{ note.visits }} visualizzazioni </span>
                                 </div>
                                 <div style="width: 15%; text-align: right;">
@@ -26,11 +24,17 @@
                     </li> 
                 </ul>
             </div>
-            <div class="box rounded bright" style="text-align: center; flex: 1; max-height: 300px;">  
-                <SVGCircle :stroke-width="2.5" ref="size" id="circle" :initial-value="0.1" :radius="100" fill="#212121" />
-                <p class="dark"> 
-                    <b>{{ size_info.folder_size_megabytes }}MB</b> su <b>{{ size_info.max_folder_size_megabytes }}MB utilizzati</b>
-                </p>
+            <div style="margin-right: 40px">
+                <h3> Utenti del sito </h3>
+                <ul class="fancy-list">
+                    <li v-for="user in users" :key="user.id">
+                        <div class="flexbox justify-between align-center" style="min-height: 50px; overflow-x: hidden;">
+                            <a :href="`/panel/edit/user/${user.id}`">
+                                <span style="display: inline-block;"> {{ user.name }} {{ user.surname }} </span><br>
+                            </a>
+                        </div>
+                    </li> 
+                </ul>
             </div>
         </div>
     </section>
@@ -40,35 +44,25 @@ import Vue from 'vue'
 import Loading from '@/components/Loading.vue';
 
 export default Vue.extend({
-    layout: 'panel',
+    layout: 'adminpanel',
     components: {
         Loading
     },
     data(){
         return {
-            userIsAdmin: false,
             latest_items: [],
-            size_info: {
-                folder_size_megabytes: '',
-                max_folder_size_megabytes: ''
-            },
+            users: [],
             name: this.$store.getters.getUser.name
         }
     },
     async created(){
 
         try{
-            this.userIsAdmin = this.$store.getters.getUser.admin;
+            
+            this.latest_items = await (this as any).$api.methods.notes.get(`&order_by=date`, 1);
 
-            let latest_items = await (this as any).$api.methods.notes.get(`&author_id=${this.$store.getters.getUser.id}&order_by=date`, 1);   
-            this.latest_items = latest_items;
-
-            let size = await (this as any).$api.methods.users.size();
-            this.size_info = size; 
-
-
-            this.$refs.size.progress(size.completion_percentage);
-
+            this.users = await (this as any).$api.methods.users.getAll();
+            
         }catch(err){
 
             console.log(err.response);

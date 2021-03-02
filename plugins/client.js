@@ -70,6 +70,20 @@ let methods = {
                 throw err;
             }
         },
+        async getPage(page, returnPageNumber) {
+
+            try {
+
+                let users = await client.get(`/users?page=${page}`);
+                return returnPageNumber ? users.data : users.data.result;
+
+            } catch (err) {
+
+                throw err;
+
+            }
+
+        },
         async editPassword(id, old_password, new_password) {
             try {
                 await client.post(`/users/${id}/password`, {
@@ -84,6 +98,19 @@ let methods = {
 
     },
     notes: {
+        async getNote(id, subject_id) {
+
+            try {
+
+                let response = await client.get(`/notes/${subject_id}/${id}`);
+                return response.data.result;
+
+            } catch (err) {
+
+                throw err;
+
+            }
+        },
         async upload(data){
 
             try {
