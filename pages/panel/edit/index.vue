@@ -10,7 +10,6 @@
                         <div class="flexbox justify-between align-center" style="min-height: 50px; overflow-x: hidden;">
                                 <div style="width: 85%;">
                                     <span style="display: inline-block;"> {{ note.title }} </span><br>
-                                     <span style="font-family: 'IBM Plex Sans', sans-serif;"> di <b>{{ note.name }} {{ note.surname }}</b></span><br>
                                     <span style="font-family: 'IBM Plex Sans', sans-serif; font-size: .89em;"> {{ note.visits }} visualizzazioni </span>
                                 </div>
                                 <div style="width: 15%; text-align: right;">
@@ -46,23 +45,19 @@ export default Vue.extend({
     ],
     data: () => {
         return {
+            notes: [],
+            notePages: 0,
             loadedPages: [1],
             load: true
         };
     },
-    async asyncData({ store }){
-        let items = {
-            notes: [],
-            notePages: 0
-        }; 
+    async created(){
         try {
-            var notesData = await methods.notes.get(`&order_by=date&author_id=${store.getters.getUser.id}`, 1, true);
-            items.notes = notesData.result;
-            items.notePages = notesData.pages;
+            var notesData = await methods.notes.get(`&order_by=date&author_id=${this.$store.getters.getUser.id}`, 1, true);
+            this.$data.notes = notesData.result;
+            this.$data.notePages = notesData.pages;
         } catch(err) {
             console.log(err);
-        }finally{
-            return items;
         }
     },
     beforeMount () {
@@ -76,7 +71,7 @@ export default Vue.extend({
         addNotePages(page: number) {
             console.log(`loading page ${page}`);
             console.log(this.$data.notes);
-            methods.notes.get(`&order_by=date&author_id=${this.$store.getters.getUser.id}`, 1, false).then((data) => {
+            methods.notes.get(`&order_by=date&author_id=${this.$store.getters.getUser.id}`, page, false).then((data) => {
                 this.$data.notes=this.$data.notes.concat(data);
                 
             });

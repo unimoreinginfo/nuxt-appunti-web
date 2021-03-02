@@ -36,7 +36,7 @@ let methods = {
             }
         }
     },
-    user: {
+    users: {
         async size(){
             try {
 
@@ -48,7 +48,40 @@ let methods = {
                 throw err;
 
             }
+        },
+        async edit(id, name, surname, unimore_id) {
+            try {
+                await client.post(`/users/${id}`, {
+                    name: name,
+                    surname: surname,
+                    unimore_id: unimore_id
+                });
+
+            } catch(err) {
+                throw err;
+            }
+        },
+        async delete(id) {
+            // SOLO PER ADMIN
+            try {
+                await client.delete(`/users/${id}`);
+    
+            } catch(err) {
+                throw err;
+            }
+        },
+        async editPassword(id, old_password, new_password) {
+            try {
+                await client.post(`/users/${id}/password`, {
+                    old_password: old_password,
+                    new_password: new_password
+                });
+
+            } catch(err) {
+                throw err;
+            }
         }
+
     },
     notes: {
         async edit(oldSub, id, newSub, newTitle) {
@@ -75,8 +108,16 @@ let methods = {
 
             }
 
-        }
-    }
+        },
+        async delete(sub, id) {
+            try {
+                await client.delete(`/notes/${sub}/${id}`);
+    
+            } catch(err) {
+                throw err;
+            }
+        }    
+    },
 }
 
 export default({ app, store }, inject) => {

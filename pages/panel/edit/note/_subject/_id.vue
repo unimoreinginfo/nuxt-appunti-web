@@ -5,7 +5,7 @@
                 <h1> Modifica post </h1>
                 <div class="container" style="align-center">
                 <div style="width:100%;margin-left:auto;margin-right:auto">
-                    <form @submit.prevent="editNote" >
+                    <form>
                         <div class="flexbox" style="flex-direction:column;">
                             <SimulatedSelect :default="item.info.subject_id" ref="select_subject" right-icon="chevron-down" placeholder="Seleziona materia" data-id="select1" :items="getSubjects" style=";margin-left:auto;margin-right:auto" />
                             <input type="text" class="fancy" v-model="item.info.title" placeholder="Titolo appunto" style="margin-top:30px"> 
@@ -48,7 +48,11 @@ export default Vue.extend({
     },
     methods: {
         async deleteNote() {
-          
+          (this as any).$api.methods.notes.delete(
+            this.$route.params.subject,
+            this.$route.params.id);
+
+          this.$router.push("/panel");
         },
         async editNote() {
             (this as any).$api.methods.notes.edit(
