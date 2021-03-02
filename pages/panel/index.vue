@@ -19,6 +19,9 @@
                                             <fa icon="edit" />
                                         </div>
                                     </a>
+                                    <div class="icon" @click="deleteNote(note.note_id, note.subject_id, note.title)" :aria-label="`Elimina appunto`" data-balloon-pos="up">
+                                            <fa icon="trash" />
+                                        </div>
                                 </div>
                             </div>
                     </li> 
@@ -77,6 +80,19 @@ export default Vue.extend({
         
     },
     methods: {
+        async deleteNote(id: string, subject: string, title: string) {
+            if(!confirm(`Vuoi eliminare ${title}?`))
+                return;            
+
+            try{
+                await (this as any).$api.methods.notes.delete(subject, id);
+            }catch(err){
+                console.log(err);
+            }finally{
+                let latest_items = await (this as any).$api.methods.notes.get(`&author_id=${this.$store.getters.getUser.id}&order_by=date`, 1);   
+                this.latest_items = latest_items;
+            }
+        }
     },
     head(){
         return {

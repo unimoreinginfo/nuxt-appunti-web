@@ -16,6 +16,10 @@
                             <button class="fancy" style="margin-right: 5px;"><span>Upload!</span></button>
                             <button class="fancy" @click.prevent="clickFiles" style="margin-right: 5px;"><span>Seleziona file</span></button>
                         </div>
+                        <div v-if="uploading" class="progress-bar">
+                            <span>{{ progress.toFixed(1) }}% ({{ loaded }}/{{ total }} MB)</span>
+                            <div class="bar" :style="{'width': `${progress}%`}"></div>
+                        </div>
                         <p>
                             {{ message }}
                         </p>
@@ -46,6 +50,10 @@ export default Vue.extend({
             title: '',
             message: '',
             files: [] as File[],
+            progress: 0,
+            loaded: 0,
+            total: 0,
+            uploading: false,
             mimetypes: [
                 "text/plain",
                 "application/pdf",
@@ -67,7 +75,7 @@ export default Vue.extend({
             this.files.splice(index, 1);
         },
         async upload(){
-
+    
             if(!this.title || !(this.$refs as any).select_subject.selected_value)
                 return this.$data.message = 'Tutti i campi sono obbligatori'
             
@@ -80,17 +88,34 @@ export default Vue.extend({
             form.append('title', this.title);
             this.files.forEach((file: File) => form.append('notes', file));
 
+            this.uploading = true;
+
             try{
-                await this.$api.methods.notes.upload(form);
+                await this.$api.client.post('/notes', form, {
+                    onUploadProgress: (progressEvent: any) => {
+                        let percentage = (progressEvent.loaded / progressEvent.total) * 100;
+
+                        this.total = (progressEvent.total / 1000000).toFixed(2);
+                        this.loaded = (progressEvent.loaded / 1000000).toFixed(2);
+                        this.updateProgress(percentage);
+                    }
+                })
                 this.message = 'Appunti caricati con successo! Grazie!'
             }catch(err){
                 console.log(err);
                 this.message = 'Errore generico durante l\'upload'
+            }finally{
+                this.uploading = false;
             }
 
         },
         clickFiles(){
             document.getElementById('files')!.click();
+        },
+        updateProgress(progress: number){
+
+            this.progress = progress;
+
         },
         loadFiles(event: Event){
 

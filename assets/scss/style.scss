@@ -66,6 +66,29 @@ section{
     .container{
         width: 80%;
     }
+    .progress-bar{
+        border-radius: 4px;
+        height: 20px;
+        margin-top: 20px;
+        text-align: center;
+        color: $white;
+        font-family: 'DM Sans', sans-serif;
+        border: 2px solid $white;
+        position: relative;
+        span{
+            font-family: 'DM Sans', sans-serif;
+            position: relative;
+            z-index: 10;
+            mix-blend-mode: difference;
+        }
+        .bar{
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: $white;
+            height: 100%;
+        }
+    }
     a{
         color: $white;
         text-decoration: none;

@@ -11,7 +11,6 @@
                             <input type="text" class="fancy" v-model="item.info.title" placeholder="Titolo appunto"> 
                             <div class="flexbox justify-center" style="margin-top: 20px;">
                                 <button @click="editNote()" class="fancy" style="margin-right: 10px;"><span>Modifica</span></button>
-                                <button @click="deleteNote()" class="fancy del" style="margin-left: 10px;"><span>Elimina</span></button>
                             </div>
                         </div>
                     </form>
@@ -55,13 +54,6 @@ export default Vue.extend({
 
     },
     methods: {
-        async deleteNote() {
-          (this as any).$api.methods.notes.delete(
-            this.$route.params.subject,
-            this.$route.params.id);
-
-          this.$router.push("/panel");
-        },
         async editNote() {
             (this as any).$api.methods.notes.edit(
                 this.$route.params.subject,

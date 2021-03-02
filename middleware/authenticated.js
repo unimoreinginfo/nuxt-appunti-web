@@ -30,7 +30,7 @@ export default async function (context) {
         
         return;
     }
-
+    
     try{
 
         let response = await client.get('/auth/user', {
