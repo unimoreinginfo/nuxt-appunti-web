@@ -25,7 +25,7 @@
                 </ul>
             </div>
             <div style="margin-right: 40px">
-                <h3> Utenti del sito </h3>
+                <h3> Alcuni utenti del sito </h3>
                 <ul class="fancy-list">
                     <li v-for="user in users" :key="user.id">
                         <div class="flexbox justify-between align-center" style="min-height: 50px; overflow-x: hidden;">
@@ -61,7 +61,7 @@ export default Vue.extend({
             
             this.latest_items = await (this as any).$api.methods.notes.get(`&order_by=date`, 1);
 
-            this.users = await (this as any).$api.methods.users.getAll();
+            this.users = await (this as any).$api.methods.users.getPage(1, false);
             
         }catch(err){
 
