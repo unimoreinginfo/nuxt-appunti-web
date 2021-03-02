@@ -71,7 +71,7 @@ export default Vue.extend({
         addNotePages(page: number) {
             console.log(`loading page ${page}`);
             console.log(this.$data.notes);
-            methods.notes.get(`&order_by=date`, page, false).then((data) => {
+            (this as any).$api.methods.notes.get(`&order_by=date`, page, false).then((data) => {
                 this.$data.notes=this.$data.notes.concat(data);
                 
             });
