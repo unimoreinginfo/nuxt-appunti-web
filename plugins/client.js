@@ -84,6 +84,19 @@ let methods = {
 
     },
     notes: {
+        async upload(data){
+
+            try {
+
+                await client.post(`/notes`, data);
+
+            } catch (err) {
+
+                throw err;
+                
+            }
+
+        },
         async edit(oldSub, id, newSub, newTitle) {
             try {
                 await client.post(`/notes/${oldSub}/${id}`, {

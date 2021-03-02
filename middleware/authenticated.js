@@ -8,11 +8,12 @@ export default async function (context) {
     let { route, req, store, redirect, app } = context;
     let route_redirect = route.path, route_name = route.name;
     let cookies = req.headers.cookie;
+    let panel = route_redirect.split("/panel").length;
     
     if(!cookies){
 
         store.commit('notLogged');
-        if(store.getters.getSecuredRoutes[route_name])
+        if(panel)
             return redirect(`/login?to=${encodeURI(route_redirect)}`);
         else return;
 
@@ -24,7 +25,7 @@ export default async function (context) {
     if(!auth_token || !ref_token){
 
         store.commit('notLogged');
-        if (store.getters.getSecuredRoutes[route_name])
+        if (panel)
             return redirect(`/login?to=${encodeURI(route_redirect)}`);
         
         return;

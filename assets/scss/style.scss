@@ -55,6 +55,9 @@ body{
     &.align-center{
         align-items: center;
     }
+    &.align-top{
+        align-items: flex-start;
+    }
     &.wrap{
         flex-wrap: wrap;
     }
@@ -286,7 +289,7 @@ form{
             border-bottom: 2.5px solid $white;
             outline: none;
             padding: 15px;
-            max-width: 200px;
+            max-width: 280px;
             width: 100%;
             &.del{
                 background: red;

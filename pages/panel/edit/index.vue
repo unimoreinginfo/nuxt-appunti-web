@@ -1,5 +1,6 @@
 <template>
   <div> 
+    <Loading ref="spinner" />
     <section id="main" class="full">
       <div class="container" style="width: 100%;" >
         <div class="flexbox">
@@ -32,7 +33,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { methods } from '@/lib/api';
-
+import Loading from '@/components/Loading.vue';
 
 /*  in sto file non posso usare il mixin dell'infinite scroll perché non posso accedere alle variabili dello store 
     (perché il mixin viene chiamato prima che il componente venga registrato sulla pagina)
@@ -40,9 +41,10 @@ import { methods } from '@/lib/api';
 
 export default Vue.extend({
     layout: 'panel',
-    mixins: [
-
-    ],
+    name: 'edit',
+    components: {
+        Loading
+    },
     data: () => {
         return {
             notes: [],
@@ -60,6 +62,9 @@ export default Vue.extend({
             console.log(err);
         }
     },
+    mounted(){
+        (this.$refs.spinner as any).hide()     
+    },
     beforeMount () {
         window.addEventListener('scroll', this.onscroll);
     },
@@ -72,6 +77,7 @@ export default Vue.extend({
             console.log(`loading page ${page}`);
             console.log(this.$data.notes);
             methods.notes.get(`&order_by=date&author_id=${this.$store.getters.getUser.id}`, page, false).then((data) => {
+
                 this.$data.notes=this.$data.notes.concat(data);
                 
             });

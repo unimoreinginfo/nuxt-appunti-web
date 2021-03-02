@@ -2,7 +2,7 @@
     <div>
         <div class="row">
             <fa :icon="left_icon" />
-                <input type="text" style="cursor: pointer;" autocomplete="none" :placeholder="place" readonly class="fancy" v-model="selected_text" @click="toggle()">
+                <input type="text" style="cursor: pointer;" autocomplete="none" :placeholder="place" readonly :class="['fancy', $props.className]" v-model="selected_text" @click="toggle()">
             <fa :icon="right_icon" class="right" />
         </div>
         <div class="desktop-selector-holder" :id="item_id">  
@@ -19,7 +19,6 @@
 
     import Vue from 'vue'
     import gsap, { Power2, TimelineMax, CSSPlugin } from 'gsap'
-    // import { Property } from '@/lib/types';
 
     gsap.registerPlugin(CSSPlugin)
 
@@ -33,6 +32,7 @@
             items: {},
             dataId: String,
             filtering: {},
+            className: String,
             "input-placeholder": String,
             clicked: Function,
             default: {} // qualsiasi roba

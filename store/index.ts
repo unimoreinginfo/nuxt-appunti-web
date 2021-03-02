@@ -5,14 +5,7 @@ export const state = () => ({
         is_logged: false
     },
     user: {} as any, // non mi va,
-    uninitialized: true,
-    secured_routes: {
-        "panel": true,
-        "panel-admin": true,
-        "panel-edit": true,
-        "panel-editNote-subject-id": true,
-        "panel-editUser-id": true
-    }
+    uninitialized: true
 })
 
 export const getters = {

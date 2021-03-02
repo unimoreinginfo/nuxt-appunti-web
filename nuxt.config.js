@@ -64,7 +64,8 @@ export default {
                 'faEdit',
                 'faCog',
                 'faSignOutAlt',
-                'faCircleNotch'
+                'faCircleNotch',
+                'faTrash'
             ]
         }
     },

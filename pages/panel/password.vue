@@ -1,29 +1,27 @@
 <template>
-    <client-only>
         <!-- TODO: (anche da backend) aggiungere route per modificare e/o aggiungere file -->
         <section id="main" class="full">
-                <h1> Impostazioni profilo </h1>
+                <h1> Cambia password </h1>
                 <div class="container" style="align-center">
                 <div style="width:100%;margin-left:auto;margin-right:auto">
                     <form @submit.prevent="editPassword ">
                         <div class="flexbox" style="flex-direction:column;">
-                            <input type="password" class="fancy" v-model="old_password" placeholder="Vecchia password" style="margin-top:30px">
-                            <input type="password" class="fancy" v-model="new_password" placeholder="Nuova password" style="margin-top:30px"> 
-                            <input type="password" class="fancy" v-model="confirm_new_password" placeholder="Conferma nuove password" style="margin-top:30px"> 
-                            <div class="flexbox justify-between align-center">
+                            <input type="password" class="fancy" v-model="old_password" placeholder="Vecchia password">
+                            <input type="password" class="fancy" v-model="new_password" placeholder="Nuova password"> 
+                            <input type="password" class="fancy" v-model="confirm_new_password" placeholder="Conferma nuove password"> 
+                            <div class="flexbox align-center">
                                 <button class="fancy" style="margin-right: 10px;"><span>Cambia password</span></button>
-                                <span style="font-family: 'DM Sans', sans-serif; color: #fefefe;">{{ message }}</span>
+                                <span style="color: white;">{{ message }}</span>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
        </section>
-  </client-only>
 </template>
 <script lang="ts">
+
 import Vue from 'vue'
-import { methods } from '@/lib/api';
 
 export default Vue.extend({
     layout: 'panel',
@@ -48,12 +46,12 @@ export default Vue.extend({
                     this.$data.old_password,
                     this.$data.new_password);
 
-                this.$router.push("/panel");
+                this.$data.message = "Password cambiata con successo"
             } catch(err) {
                 console.log(err);
                 this.$data.message="Password sbagliata";
             }
-        },
-    },
+        }
+    }
 })
 </script>
