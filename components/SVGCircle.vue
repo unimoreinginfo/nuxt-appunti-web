@@ -54,7 +54,7 @@ export default Vue.extend({
     methods: {
         progress(percentage: number){
             console.log(`setting percentage ${percentage}`);
-            this.value = percentage;
+            this.value = parseFloat(percentage.toFixed(2));
             this.el!.style.strokeDashoffset = (this.len - percentage / 100 * this.len).toString();
         }
     }

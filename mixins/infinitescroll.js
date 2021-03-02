@@ -22,15 +22,16 @@ export default function infiniteScrollComponent(url){
                 console.log(this.$data.notes);
                 methods.notes.get(url, 1, false).then((data) => {
                     this.$data.notes = this.$data.notes.concat(data);
-
                 });
             },
             onscroll() {
                 // chiamato per ogni scroll, debouncing scorrimento
                 if (this.$data.load) {
+
                     this.$data.load = false;
                     setTimeout(() => { this.$data.load = true }, 500);
                     setTimeout(this.onScroll, 200);
+                    
                 }
             },
             onScroll() {

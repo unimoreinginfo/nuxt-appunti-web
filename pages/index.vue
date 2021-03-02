@@ -33,8 +33,12 @@
 <script lang="ts">
 import Vue from 'vue'
 import { methods } from '@/lib/api';
+import Loading from '@/components/Loading.vue';
 
 export default Vue.extend({
+    components: {
+        Loading
+    },
     async asyncData(){
 
         let items = {

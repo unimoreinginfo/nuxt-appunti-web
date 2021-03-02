@@ -1,5 +1,6 @@
 <template>
     <section id="main">
+        <Loading ref="spinner" />
         <h1 class="main" style="margin: 0;"> Ciao, {{ name }} </h1>
         <h2> Ecco un veloce riepilogo </h2>
         <div class="flexbox align-top" style="margin-top: 50px; width: 100%;">
@@ -24,7 +25,7 @@
                 </ul>
             </div>
             <div class="box rounded bright" style="text-align: center; flex: 1; max-height: 300px;">  
-                <SVGCircle :stroke-width="2.5" ref="size" id="circle" :initial-value="0" :radius="100" fill="#212121" />
+                <SVGCircle :stroke-width="2.5" ref="size" id="circle" :initial-value="0.1" :radius="100" fill="#212121" />
                 <p class="dark"> 
                     <b>{{ size_info.folder_size_megabytes }}MB</b> su <b>{{ size_info.max_folder_size_megabytes }}MB utilizzati</b>
                 </p>
@@ -34,10 +35,13 @@
 </template>
 <script lang="ts">
 import Vue from 'vue'
-import { methods } from '@/lib/api';
+import Loading from '@/components/Loading.vue';
 
 export default Vue.extend({
     layout: 'panel',
+    components: {
+        Loading
+    },
     data(){
         return {
             latest_items: [],
@@ -66,6 +70,11 @@ export default Vue.extend({
 
         }
 
+    },
+    mounted(){
+
+        setTimeout((this.$refs.spinner as any).hide, 250);
+        
     },
     methods: {
     },

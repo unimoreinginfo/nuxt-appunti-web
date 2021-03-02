@@ -11,7 +11,7 @@
                 <li @click="logout"> <fa icon="sign-out-alt" class="right" /> Logout </li>
             </ul>
         </div>
-        <Nuxt style="flex: 1; margin-left: 30px;" />
+        <Nuxt style="flex: 1; margin-left: 30px; position: relative; min-height: calc(100vh - 120px)" />
     </div>
   </div>
 </template>

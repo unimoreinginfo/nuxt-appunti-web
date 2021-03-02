@@ -63,7 +63,8 @@ export default {
                 'faUpload',
                 'faEdit',
                 'faCog',
-                'faSignOutAlt'
+                'faSignOutAlt',
+                'faCircleNotch'
             ]
         }
     },
