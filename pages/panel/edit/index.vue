@@ -4,7 +4,7 @@
       <div class="container" style="width: 100%;" >
         <div class="flexbox">
             <div style="width: 100%;" id="notes">
-                <h1>I tuoi appuntis</h1>
+                <h1>I tuoi appunti</h1>
                 <ul class="fancy-list">
                     <li v-for="note in notes" :key="note.id">
                         <div class="flexbox justify-between align-center" style="min-height: 50px; overflow-x: hidden;">
