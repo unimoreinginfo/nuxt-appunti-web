@@ -11,19 +11,18 @@ export default function infiniteScrollComponent(getFirstPage, getPage){
                 load: true
             };
         },
-        
+        async created() {
+            let firstPage = getFirstPage();
+            this.$data.pageNumber = firstPage.pages;
+            this.$data.items = firstPage.result;
+        },
+        beforeMount() {
+            window.addEventListener('scroll', this.onscroll);
+        },
+        beforeDestroy() {
+            window.removeEventListener('scroll', this.onscroll);
+        },
         methods: {
-            async created() {
-                let firstPage = getFirstPage();
-                this.$data.pageNumber = firstPage.pages;
-                this.$data.items = firstPage.result;
-            },
-            beforeMount() {
-                window.addEventListener('scroll', this.onscroll);
-            },
-            beforeDestroy() {
-                window.removeEventListener('scroll', this.onscroll);
-            },
             // roba infinite scroll
             addNotePages(page) {
                 console.log(`loading page ${page}`);
