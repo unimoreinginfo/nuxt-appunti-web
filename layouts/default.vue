@@ -45,7 +45,7 @@
             }
         }
     }
-    @media screen and (max-width: 500px) {
+    @media screen and (max-width: 768px) {
         #mobile-toggle{
             display: block;
         }
