@@ -32,7 +32,7 @@ export default Vue.extend({
     async asyncData({ params }){
         try{
 
-            let item = await methods.notes.getNote(params.id, parseInt(params.subject)),
+            let item = await (this as any).$api.methods.notes.getNote(params.id, parseInt(params.subject)),
                 date = new Date(item.info.uploaded_at);
             
             console.log(item.info);

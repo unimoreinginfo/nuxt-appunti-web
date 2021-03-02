@@ -4,11 +4,9 @@
     <div id="panel-layout" class="flexbox align-top justify-between" style="width: 80%; margin: 0 auto; margin-top: 120px">
         <div id="panel-sidebar">
             <ul class="fancy-list noborder ibm">
-                <a href="/panel"><li><fa icon="list-alt" class="right" /> Riepilogo</li> </a>
-                <a href="/panel/upload"><li> <fa icon="upload" class="right" /> Carica appunti </li></a>
-                <a href="/panel/edit"><li> <fa icon="edit" class="right" /> Tutti i tuoi appunti</li></a> 
-                <a href="/panel/settings"><li> <fa icon="cog" class="right" /> Impostazioni profilo </li></a>
-                <li @click="logout"> <fa icon="sign-out-alt" class="right" /> Logout </li>
+                <a href="/panel/admin"><li><fa icon="list-alt" class="right" /> Home page admin</li> </a>
+                <a href="/panel/admin/notes"><li> <fa icon="edit" class="right" /> Lista completa appunti</li></a> 
+                <a href="/panel/admin/users"><li> <fa icon="cog" class="right" /> Lista utenti </li></a>
             </ul>
         </div>
         <Nuxt style="flex: 1; margin-left: 30px; position: relative; min-height: calc(100vh - 120px)" />

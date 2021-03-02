@@ -2,6 +2,8 @@
     <section id="main">
         <Loading ref="spinner" />
         <h1 class="main" style="margin: 0;"> Ciao, {{ name }} </h1>
+        
+        <ul style="width:200px" v-if="userIsAdmin" class="fancy-list noborder"><a href="/panel/admin"><li>vai al pannello admin</li> </a></ul>
         <h2> Ecco un veloce riepilogo </h2>
         <div class="flexbox align-top" style="margin-top: 50px; width: 100%;">
             <div style="margin-right: 40px; width: 70%;">
@@ -47,6 +49,7 @@ export default Vue.extend({
     },
     data(){
         return {
+            userIsAdmin: false,
             latest_items: [],
             size_info: {
                 folder_size_megabytes: '',
@@ -58,12 +61,14 @@ export default Vue.extend({
     async created(){
 
         try{
-            
+            this.userIsAdmin = this.$store.getters.getUser.admin;
+
             let latest_items = await (this as any).$api.methods.notes.get(`&author_id=${this.$store.getters.getUser.id}&order_by=date`, 1);   
             this.latest_items = latest_items;
 
             let size = await (this as any).$api.methods.users.size();
             this.size_info = size; 
+
 
             this.$refs.size.progress(size.completion_percentage);
 

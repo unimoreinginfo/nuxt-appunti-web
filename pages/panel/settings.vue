@@ -43,7 +43,7 @@ export default Vue.extend({
     },
     created(){
         try{
-
+            // aggiorniamo just in case
             methods.users.get(this.$store.getters.getUser.id).then((res) => {
                 this.$data.name = res.name;
                 this.$data.surname = res.surname;
