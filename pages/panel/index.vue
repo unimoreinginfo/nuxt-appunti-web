@@ -13,7 +13,7 @@
                                     <span style="font-family: 'IBM Plex Sans', sans-serif; font-size: .89em;"> {{ note.visits }} visualizzazioni </span>
                                 </div>
                                 <div style="width: 15%; text-align: right;">
-                                    <a :href="`/panel/editNote/${note.subject_id}/${note.note_id}`">
+                                    <a :href="`/panel/edit/note/${note.subject_id}/${note.note_id}`">
                                         <div class="icon" :aria-label="`Modifica`" data-balloon-pos="left">
                                             <fa icon="edit" />
                                         </div>

@@ -10,8 +10,8 @@
                             <SimulatedSelect :default="item.info.subject_id" ref="select_subject" right-icon="chevron-down" placeholder="Seleziona materia" data-id="select1" :items="getSubjects" style=";margin-left:auto;margin-right:auto" />
                             <input type="text" class="fancy" v-model="item.info.title" placeholder="Titolo appunto" style="margin-top:30px"> 
                             <div class="flexbox justify-center" style="margin-top: 20px;">
-                                <button on="editNote()" class="fancy" style="margin-right: 10px;"><span>Modifica</span></button>
-                                <button v-on="deleteNote()" class="fancy del" style="margin-left: 10px;"><span>Elimina</span></button>
+                                <button @click="editNote()" class="fancy" style="margin-right: 10px;"><span>Modifica</span></button>
+                                <button @click="deleteNote()" class="fancy del" style="margin-left: 10px;"><span>Elimina</span></button>
                             </div>
                         </div>
                     </form>

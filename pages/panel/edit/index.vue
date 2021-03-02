@@ -1,10 +1,10 @@
 <template>
   <div> 
-    <section id="main" class="full flexbox justify-center">
-      <div class="container" style="margin-bottom:20px">
+    <section id="main" class="full">
+      <div class="container" style="width: 100%;" >
         <div class="flexbox">
-            <div style="width: 70%;" id="notes">
-                <h1>Appunti</h1>
+            <div style="width: 100%;" id="notes">
+                <h1>I tuoi appuntis</h1>
                 <ul class="fancy-list">
                     <li v-for="note in notes" :key="note.id">
                         <div class="flexbox justify-between align-center" style="min-height: 50px; overflow-x: hidden;">
@@ -14,7 +14,7 @@
                                     <span style="font-family: 'IBM Plex Sans', sans-serif; font-size: .89em;"> {{ note.visits }} visualizzazioni </span>
                                 </div>
                                 <div style="width: 15%; text-align: right;">
-                                    <a :href="`/panel/editNote/${note.subject_id}/${note.note_id}`">
+                                    <a :href="`/panel/edit/note/${note.subject_id}/${note.note_id}`">
                                         <div class="icon" :aria-label="`Modifica`" data-balloon-pos="left">
                                             <fa icon="edit" />
                                         </div>
@@ -34,12 +34,16 @@
 import Vue from 'vue'
 import { methods } from '@/lib/api';
 
-/*  in sto file non posso usare il mixin perché non posso accedere alle variabili dello store 
+
+/*  in sto file non posso usare il mixin dell'infinite scroll perché non posso accedere alle variabili dello store 
     (perché il mixin viene chiamato prima che il componente venga registrato sulla pagina)
 */
 
 export default Vue.extend({
     layout: 'panel',
+    mixins: [
+
+    ],
     data: () => {
         return {
             loadedPages: [1],
