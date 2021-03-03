@@ -32,10 +32,10 @@ import { methods } from '@/lib/api';
 export default Vue.extend({
 
     layout: 'adminpanel',
-    async asyncData({ params }){
+    async created(){
         try{
 
-            let item = await (this as any).$api.methods.users.get(params.id);
+            let item = await (this as any).$api.methods.users.get(this.$route.params.id);
             
             return item;
 

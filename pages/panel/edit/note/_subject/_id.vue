@@ -29,15 +29,29 @@ export default Vue.extend({
     components: {
         Loading
     },
-    async asyncData({ params }){
+    data: () => {
+        return {
+            item: {
+                info: {
+                    subject_id: 0,
+                    uploaded_at: ""
+                }
+            },
+            date: "",
+            time: ""
+        }
+    },
+    async created(){
         try{
 
-            let item = await (this as any).$api.methods.notes.getNote(params.id, parseInt(params.subject)),
-                date = new Date(item.info.uploaded_at);
+            this.item = await (this as any).$api.methods.notes.getNote(this.$route.params.id, parseInt(this.$route.params.subject));
+            let date = (new Date(this.item.info.uploaded_at))
             
-            console.log(item.info);
+            this.date = date.toLocaleDateString();
+            this.time = date.toLocaleTimeString();
             
-            return { item, date: date.toLocaleDateString(), time: date.toLocaleTimeString() }
+            console.log(this.item.info);
+            
 
         }catch(err){
 
