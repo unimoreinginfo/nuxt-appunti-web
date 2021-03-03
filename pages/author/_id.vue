@@ -51,7 +51,11 @@
 <script lang="ts">
 import Vue from 'vue'
 import { methods } from '@/lib/api';
+import infiniteScrollComponent from '~/mixins/infinitescroll';
 export default Vue.extend({
+    mixins: [
+        infiniteScrollComponent()
+    ],
     async asyncData({ params, redirect }){
         try{
 
@@ -90,6 +94,13 @@ export default Vue.extend({
         }
     },
     methods: {
+        async getFirstPage () {
+            return await methods.notes.get(`&author_id=${this.$route.params.id}&translate_subjects=true`, 1, true);
+        },
+        async getPage (page: number) {
+            return await methods.notes.get(`&author_id=${this.$route.params.id}&translate_subjects=true`, page, false);
+        },
+
         async filter(){
 
             try{

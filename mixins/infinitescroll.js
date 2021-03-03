@@ -1,41 +1,39 @@
 import { methods } from '@/lib/api';
 
-export default function infiniteScrollComponent(getFirstPage, getPage){
+export default function infiniteScrollComponent(){
 
     return {
         data: () => {
             return {
-                items: [],
                 pageNumber: 1,
                 loadedPage: 1,
                 load: true
             };
         },
         async created() {
-            let firstPage = getFirstPage();
+            let firstPage = await this.getFirstPage();
             this.$data.pageNumber = firstPage.pages;
             this.$data.items = firstPage.result;
         },
-        beforeMount() {
+        mounted: function() {
             window.addEventListener('scroll', this.onscroll);
         },
-        beforeDestroy() {
+        destroyed: function() {
             window.removeEventListener('scroll', this.onscroll);
         },
         methods: {
             // roba infinite scroll
             addNotePages(page) {
                 console.log(`loading page ${page}`);
-                getPage(page).then((data) => {
-                    arr = arr.concat(data);
+                this.getPage(page).then((data) => {
+                    this.notes = this.notes.concat(data);
 
                 });
             },
             onscroll() {
                 // chiamato per ogni scroll, debouncing scorrimento
-                if (this.$data.load) {
-
-                    this.$data.load = false;
+                if (this.load) {
+                    this.load = false;
                     setTimeout(() => { this.$data.load = true }, 500);
                     setTimeout(this.onScroll, 200);
                     
@@ -43,7 +41,7 @@ export default function infiniteScrollComponent(getFirstPage, getPage){
             },
             onScroll() {
                 // funzione che fa funzionare l'infinite scroll vero e proprio
-                if (this.$data.loadedPage < notePages) {
+                if (this.$data.loadedPage < this.pageNumber) {
                     console.log("fired onscroll");
                     let totalPageHeight = document.body.scrollHeight;
                     let scrollPoint = window.scrollY + window.innerHeight;
