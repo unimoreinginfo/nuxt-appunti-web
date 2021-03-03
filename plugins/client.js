@@ -37,6 +37,21 @@ let methods = {
         }
     },
     users: {
+        async get(id){
+
+            try{
+    
+                let response = await client.get(`/users/${id}`);
+                return response.data.result;
+    
+            }catch(err){
+    
+                console.log(err);
+                throw err;
+    
+            }
+    
+        },
         async size(){
             try {
 

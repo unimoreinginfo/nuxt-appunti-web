@@ -35,7 +35,7 @@ export default Vue.extend({
     async asyncData({ params }){
         try{
 
-            let item = await methods.users.get(params.id);
+            let item = await (this as any).$api.methods.users.get(params.id);
             
             return item;
 

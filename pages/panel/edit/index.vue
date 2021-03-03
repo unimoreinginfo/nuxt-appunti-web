@@ -58,7 +58,7 @@ export default Vue.extend({
     },
     async created(){
         try {
-            var notesData = await methods.notes.get(`&order_by=date&author_id=${this.$store.getters.getUser.id}`, 1, true);
+            var notesData = await (this as any).$api.methods.notes.get(`&order_by=date&author_id=${this.$store.getters.getUser.id}`, 1, true);
             this.$data.notes = notesData.result;
             this.$data.notePages = notesData.pages;
         } catch(err) {
@@ -75,14 +75,6 @@ export default Vue.extend({
         window.removeEventListener('scroll', this.onscroll);
     },
     methods: {
-        // roba infinite scroll
-        async deleteNote() {
-          (this as any).$api.methods.notes.delete(
-            this.$route.params.subject,
-            this.$route.params.id);
-
-          this.$router.push("/panel");
-        },
         async deleteNote(id: string, subject: string, title: string) {
             if(!confirm(`Vuoi eliminare ${title}?`))
                 return;            
@@ -92,14 +84,17 @@ export default Vue.extend({
             }catch(err){
                 console.log(err);
             }finally{
-                let latest_items = await (this as any).$api.methods.notes.get(`&author_id=${this.$store.getters.getUser.id}&order_by=date`, 1);   
-                this.latest_items = latest_items;
+                this.notes = [];
+                for(let i = 1; i<=this.loadedPages.length; i++) {
+                    this.addNotePages(i);
+                }
             }
         },
+        // roba infinite scroll
         addNotePages(page: number) {
             console.log(`loading page ${page}`);
             console.log(this.$data.notes);
-            methods.notes.get(`&order_by=date&author_id=${this.$store.getters.getUser.id}`, page, false).then((data) => {
+            (this as any).$api.methods.notes.get(`&order_by=date&author_id=${this.$store.getters.getUser.id}`, page, false).then((data) => {
 
                 this.$data.notes=this.$data.notes.concat(data);
                 

@@ -18,6 +18,9 @@
                                             <fa icon="edit" />
                                         </div>
                                     </a>
+                                    <div class="icon" @click="deleteNote(note.note_id, note.subject_id, note.title)" aria-label="Elimina appunto" data-balloon-pos="up">
+                                        <fa icon="trash" />
+                                    </div>
                                 </div>
                             </div>
                     </li> 
@@ -45,6 +48,7 @@ export default Vue.extend({
     ],
     data: () => {
         return {
+            // TODO: switch from array to just one var
             notes: [],
             notePages: 0,
             loadedPages: [1],
@@ -53,7 +57,7 @@ export default Vue.extend({
     },
     async created(){
         try {
-            var notesData = await methods.notes.get(`&order_by=date`, 1, true);
+            var notesData = await (this as any).$api.methods.notes.get(`&order_by=date`, 1, true);
             this.$data.notes = notesData.result;
             this.$data.notePages = notesData.pages;
         } catch(err) {
@@ -67,6 +71,23 @@ export default Vue.extend({
         window.removeEventListener('scroll', this.onscroll);
     },
     methods: {
+        async deleteNote(id: string, subject: string, title: string) {
+            if(!confirm(`Vuoi eliminare ${title}?`))
+                return;            
+
+            try{
+                await (this as any).$api.methods.notes.delete(subject, id);
+            }catch(err){
+                console.log(err);
+            }finally{
+                this.notes = [];
+                for(let i = 1; i<=this.loadedPages.length; i++) {
+                    this.addNotePages(i);
+                }
+                
+            }
+        },
+
         // roba infinite scroll
         addNotePages(page: number) {
             console.log(`loading page ${page}`);
