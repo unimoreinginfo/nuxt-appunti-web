@@ -5,10 +5,11 @@
                 <form @submit.prevent="login">
                     <input class="fancy" placeholder="Indirizzo email" type="email" style="width: 100%;" v-model="email">
                     <input class="fancy" placeholder="Password" type="password" style="width: 100%" v-model="password">
-                    <div class="flexbox justify-between align-center">
+                    <div class="flexbox justify-between align-center" style="margin-bottom:20px">
                         <button class="fancy"> <span> Accedi </span> </button>
                         <span style="font-family: 'DM Sans', sans-serif; color: #fefefe;">{{ message }}</span>
                     </div>
+                    <ul style="width:200px" class="fancy-list noborder"><a href="/signup"><li>oppure registrati</li> </a></ul>
                 </form>
             </div>
     </section>
