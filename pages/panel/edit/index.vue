@@ -35,7 +35,6 @@
 </template>
 <script lang="ts">
 import Vue from 'vue'
-import { methods } from '@/lib/api';
 import Loading from '@/components/Loading.vue';
 
 /*  in sto file non posso usare il mixin dell'infinite scroll perché non posso accedere alle variabili dello store 

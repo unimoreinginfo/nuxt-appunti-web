@@ -13,7 +13,7 @@ export default async function (context) {
     if(!cookies){
 
         store.commit('notLogged');
-        if(panel)
+        if(panel > 1)
             return redirect(`/login?to=${encodeURI(route_redirect)}`);
         else return;
 
