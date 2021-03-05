@@ -4,9 +4,8 @@
       <div class="container" style="width: 100%;" >
         <div class="flexbox">
             <div style="width: 100%;" id="users">
-                <h1>I tuoi appunti</h1>
+                <h1>Tutti gli utenti del sito</h1>
                 <ul class="fancy-list">
-                    
                     <li v-for="user in users" :key="user.id">
                         <a :href="`/panel/edit/user/${user.id}`">
                             <div class="flexbox justify-between align-center" style="min-height: 50px; overflow-x: hidden;">
