@@ -16,7 +16,7 @@
                     </div>
                 </div>
                 <form>
-                    <Searchbar ref="searchbar" model="fancy full-width" id="filter" :placeholder="`Cerca fra gli appunti di ${author.name}`" :searchAction="filter" :disable-results="false" :timeout="true" outer-style="width: 100%; margin: 0 auto;" result-model="bright h100 hover-darken-blue" />
+                    <Searchbar ref="searchbar" model="fancy full-width" id="filter" :placeholder="`Cerca fra gli appunti di ${author.name}`" :searchAction="filter" :disable-results="false" :timeout="true" outer-style="width: 100%; margin: 0 auto;" result-model="bright h100 hover-darken-blue" :searchPageUrlGen="generateSearchPageUrl" />
                 </form>
             </div>
             <div class="flexbox align-top justify-center wrap" style="margin-top: 80px; width: 100%; margin-left: -20px;">
@@ -94,6 +94,11 @@ export default Vue.extend({
         }
     },
     methods: {
+        generateSearchPageUrl() {
+            let query = (this as any).$refs.searchbar.query;
+
+            return `/search?q=${query}&author_id=${this.$route.params.id}`
+        },
         async getFirstPage () {
             return await methods.notes.get(`&author_id=${this.$route.params.id}&translate_subjects=true`, 1, true);
         },

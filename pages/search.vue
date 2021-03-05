@@ -42,8 +42,10 @@ export default Vue.extend({
     async asyncData({ query }){
         try{
             let q = query.q as string;
-            let notes = await methods.notes.searchNotes(q);
-            return { notes, q}
+            let subject_id = query.subjectId ? parseInt(query.subject_id as string) : undefined;
+            let author_id = query.author_id ? query.author_id as string : undefined;
+            let notes = await methods.notes.searchNotes(q, subject_id, author_id);
+            return { notes, q, subject_id, author_id}
 
 
         }catch(err){
@@ -56,10 +58,10 @@ export default Vue.extend({
     },
     methods: {
         async getFirstPage () {
-            return await methods.notes.searchNotes(this.$data.q, undefined, undefined, 1, true);
+            return await methods.notes.searchNotes(this.$data.q, this.$data.subject_id, this.$data.author_id, 1, true);
         },
         async getPage (page: number) {
-            return await methods.notes.searchNotes(this.$data.q, undefined, undefined, page, false);
+            return await methods.notes.searchNotes(this.$data.q, this.$data.subject_id, this.$data.author_id, page, false);
         },
     }
 })

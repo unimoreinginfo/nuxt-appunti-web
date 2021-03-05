@@ -9,7 +9,7 @@
                 <form class="full-width centered">
                     <div class="flexbox" style="align-items: flex-start;" id="main_form">
                         <SimulatedSelect ref="select_subject" right-icon="chevron-down" placeholder="Seleziona materia" data-id="select1" :items="getSubjects" />
-                        <Searchbar ref="searchbar" model="fancy full-width" id="search" placeholder="Che cosa stai cercando?" :searchAction="getNotes" :disable-results="false" :timeout="true" outer-style="width: 100%; margin: 0 auto;" result-model="bright h100 hover-darken-blue" />
+                        <Searchbar ref="searchbar" model="fancy full-width" id="search" placeholder="Che cosa stai cercando?" :searchAction="getNotes" :disable-results="false" :timeout="true" outer-style="width: 100%; margin: 0 auto;" result-model="bright h100 hover-darken-blue" :searchPageUrlGen="generateSearchPageUrl" />
                     </div>
                 </form>
             </div>
@@ -65,6 +65,12 @@ export default Vue.extend({
 
     },
     methods: {
+        generateSearchPageUrl() {
+            let query = (this as any).$refs.searchbar.query,
+                subject = (this as any).$refs.select_subject.selected_value;
+
+            return `/search?q=${query}&subject_id=${subject ? subject : 'any'}`
+        },
         async getNotes(){
 
             let query = (this as any).$refs.searchbar.query,

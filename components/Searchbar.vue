@@ -16,6 +16,7 @@
 <script lang="ts">
 
 import Vue from 'vue'
+import subjects from '~/lib/api/subjects'
 
 export default Vue.extend({
     name: 'searchbar',
@@ -28,7 +29,8 @@ export default Vue.extend({
         disableResults: Boolean,
         resultHolderModel: String,
         timeout: Boolean,
-        disableMore: Boolean
+        disableMore: Boolean,
+        searchPageUrlGen: Function
     },
     data(){
         return {
@@ -61,7 +63,7 @@ export default Vue.extend({
                     })
 
                     if(!this.disableMore)
-                        this.items.push({ title: 'Clicca per visualizzare altri risultati', url: `/search?q=${this.query}`, hide_author: true })
+                        this.items.push({ title: 'Clicca per visualizzare altri risultati', url: this.searchPageUrlGen(), hide_author: true })
                     
                 }
                 else await this.searchFunction();
