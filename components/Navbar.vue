@@ -8,6 +8,7 @@
         <a href="/"><nav class="bright">home</nav></a>
         <a href="/subjects"><nav class="bright">materie disponibili</nav></a>
         <a href="/login" v-if="!$store.getters.isLogged"><nav class="bright"><b>login</b></nav></a>
+        <a href="/signup" v-if="!$store.getters.isLogged"><nav class="bright"><b>registrati</b></nav></a>
         <a href="/panel" v-if="$store.getters.isLogged"><nav class="bright"><b>il tuo profilo</b></nav></a>
       </div>
       <div id="mobile-toggle" @click="toggleMenu">
@@ -20,6 +21,7 @@
             <li><a href="/"><nav class="bright">home</nav></a></li>
             <li><a href="/subjects"><nav class="bright">materie disponibili</nav></a></li>
             <li><a href="/login" v-if="!$store.getters.isLogged"><nav class="bright"><b>login</b></nav></a></li>
+            <li><a href="/signup" v-if="!$store.getters.isLogged"><nav class="bright"><b>registrati</b></nav></a></li>
             <li><a href="/panel" v-if="$store.getters.isLogged"><nav class="bright"><b>il tuo profilo</b></nav></a></li>
         </ul>
     </div>

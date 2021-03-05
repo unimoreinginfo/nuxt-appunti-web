@@ -9,7 +9,7 @@
                         <button class="fancy"> <span> Accedi </span> </button>
                         <span style="font-family: 'DM Sans', sans-serif; color: #fefefe;">{{ message }}</span>
                     </div>
-                    <ul style="width:200px" class="fancy-list noborder"><a href="/signup"><li>oppure registrati</li> </a></ul>
+                    <p>Oppure, <a href="/signup" class="normal">registrati</a></p>
                 </form>
             </div>
     </section>

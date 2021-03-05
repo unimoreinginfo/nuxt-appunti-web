@@ -91,12 +91,12 @@ export default Vue.extend({
             this.uploading = true;
 
             try{
-                await this.$api.client.post('/notes', form, {
+                await (this as any).$api.client.post('/notes', form, {
                     onUploadProgress: (progressEvent: any) => {
                         let percentage = (progressEvent.loaded / progressEvent.total) * 100;
 
-                        this.total = (progressEvent.total / 1000000).toFixed(2);
-                        this.loaded = (progressEvent.loaded / 1000000).toFixed(2);
+                        this.total = parseFloat((progressEvent.total / 1000000).toFixed(2));
+                        this.loaded = parseFloat((progressEvent.loaded / 1000000).toFixed(2));
                         this.updateProgress(percentage);
                     }
                 })
