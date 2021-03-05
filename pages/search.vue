@@ -42,7 +42,7 @@ export default Vue.extend({
     async asyncData({ query }){
         try{
             let q = query.q as string;
-            let subject_id = query.subjectId ? parseInt(query.subject_id as string) : undefined;
+            let subject_id = query.subject_id ? parseInt(query.subject_id as string) : undefined;
             let author_id = query.author_id ? query.author_id as string : undefined;
             let notes = await methods.notes.searchNotes(q, subject_id, author_id);
             return { notes, q, subject_id, author_id}
