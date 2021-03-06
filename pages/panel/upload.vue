@@ -1,5 +1,10 @@
 <template>
     <section id="main">
+        <nuxt-link to="/panel" id="back">
+            <div class="flexbox align-center" style="margin-bottom: 20px; background: #fefefe; max-width: 200px; width: 100%; padding-left: 10px; padding-right: 10px;">
+                <fa icon="arrow-alt-circle-left" style="font-size: 2em; color: #5352ed; margin-right: 20px;" /> <p style="color: #5352ed">Torna alla home</p>
+            </div>
+        </nuxt-link>
         <h1 style="margin: 0;"> Carica qualcosa </h1>
             <p> 
                 Puoi caricare un massimo di <b> 20 </b> file alla volta con dimensione massima dell'upload di <b>20MB</b>.<br>
@@ -7,7 +12,7 @@
                 <br>
                 I file non supportati non verranno visualizzati all'interno della lista file da caricare.
             </p>
-            <form style="width: 80%;" @submit.prevent="upload">
+            <form style="width: 80%;" @submit.prevent="upload" id="former">
                 <input type="text" class="fancy full-width" placeholder="Titolo" v-model="title">
                 <SimulatedSelect class-name="full-width" ref="select_subject" right-icon="chevron-down" placeholder="Seleziona materia" data-id="select1" :items="getSubjects" />
                 <div class="flexbox align-top justify-between">
@@ -38,6 +43,11 @@
             </form>
     </section>
 </template>
+<style lang="scss" scoped>
+    #former{
+        width: 100% !important;
+    }
+</style>
 <script lang="ts">
 
 import Vue from 'vue'

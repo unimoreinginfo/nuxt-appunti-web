@@ -2,6 +2,11 @@
   <div> 
     <Loading ref="spinner" />
     <section id="main" class="full">
+        <nuxt-link to="/panel" id="back">
+            <div class="flexbox align-center" style="margin-bottom: 20px; background: #fefefe; max-width: 200px; width: 100%; padding-left: 10px; padding-right: 10px;">
+                <fa icon="arrow-alt-circle-left" style="font-size: 2em; color: #5352ed; margin-right: 20px;" /> <p style="color: #5352ed">Torna alla home</p>
+            </div>
+        </nuxt-link>
       <div class="container" style="width: 100%;" >
         <div class="flexbox">
             <div style="width: 100%;" id="notes">
@@ -11,7 +16,8 @@
                         <div class="flexbox justify-between align-center" style="min-height: 50px; overflow-x: hidden;">
                                 <div style="width: 85%;">
                                     <span style="display: inline-block;"> {{ note.title }} </span><br>
-                                    <span style="font-family: 'IBM Plex Sans', sans-serif; font-size: .89em;"> {{ note.visits }} visualizzazioni </span>
+                                    <span style="font-family: 'IBM Plex Sans', sans-serif; font-size: .89em;"> {{ note.visits }} visualizzazioni </span><br>
+                                    <span style="font-family: 'IBM Plex Sans', sans-serif; font-size: .89em;"> {{ note.subject_name }} </span>
                                 </div>
                                 <div style="width: 15%; text-align: right;">
                                     <a :href="`/panel/edit/note/${note.subject_id}/${note.note_id}`">
@@ -57,7 +63,7 @@ export default Vue.extend({
     },
     async created(){
         try {
-            var notesData = await (this as any).$api.methods.notes.get(`&order_by=date&author_id=${this.$store.getters.getUser.id}`, 1, true);
+            var notesData = await (this as any).$api.methods.notes.get(`&translate_subjects=true&order_by=date&author_id=${this.$store.getters.getUser.id}`, 1, true);
             this.$data.notes = notesData.result;
             this.$data.notePages = notesData.pages;
         } catch(err) {
@@ -93,7 +99,7 @@ export default Vue.extend({
         addNotePages(page: number) {
             console.log(`loading page ${page}`);
             console.log(this.$data.notes);
-            (this as any).$api.methods.notes.get(`&order_by=date&author_id=${this.$store.getters.getUser.id}`, page, false).then((data: any) => {
+            (this as any).$api.methods.notes.get(`&translate_subjects=true&order_by=date&author_id=${this.$store.getters.getUser.id}`, page, false).then((data: any) => {
 
                 this.$data.notes=this.$data.notes.concat(data);
                 

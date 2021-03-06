@@ -10,6 +10,12 @@ body{
 .dark{
     color: $black;
 }
+#index_menu{
+    display: none;
+}
+#back{
+    display: none;
+}
 #navbar{
     position: fixed;
     width: 80%;
@@ -91,7 +97,7 @@ section{
     }
     a{
         color: $white;
-        text-decoration: none;
+        text-decoration: none !important;
         &.normal{
             border-bottom: 1px solid $white;
         }

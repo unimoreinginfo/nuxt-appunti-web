@@ -33,7 +33,8 @@ import { TimelineMax, Power2 } from 'gsap';
 export default Vue.extend({
     data(){
         return {
-            timeline: new TimelineMax({ paused: true })
+            timeline: new TimelineMax({ paused: true }),
+            width: 0
         }
     },
     methods: {
@@ -48,6 +49,12 @@ export default Vue.extend({
 
     },
     mounted(){
+
+        let self = this;
+        this.width = window.innerWidth;
+
+        window.onresize = () => self.$data.width = window.innerWidth;
+
         this.timeline.to('.bar.first', {
             duration: .25,
             ease: Power2.easeInOut,

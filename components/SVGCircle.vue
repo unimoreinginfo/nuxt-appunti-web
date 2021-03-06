@@ -2,8 +2,8 @@
     <div>
         <svg
                     class="progress-ring"
-                    width="250"
-                    height="250">
+                    :width="w"
+                    :height="h">
                 <circle
                     class="progress-ring"
                     :id="$props.id"
@@ -16,7 +16,12 @@
                     :style="{'opacity': loaded}"
                 />
                 <text v-if="loaded" x="50%" y="52.5%" :fill="$props.fill || '#fefefe'" text-anchor="middle" 
-                    style="font-family: 'IBM Plex Sans', sans-serif; transform: rotate(-45deg); font-size: 2em; transform-origin: 50% 50%;"
+                    :style="{
+                        'font-family': 'IBM Plex Sans, sans-serif',
+                        'transform': 'rotate(-45deg)',
+                        'transform-origin': '50% 50%',
+                        'font-size': font_size
+                    }"
                 >
                     {{ value }}%
                 </text>
@@ -31,7 +36,10 @@ export default Vue.extend({
             el: {} as any,
             len: 2 * Math.PI * parseFloat(this.$props.radius),
             loaded: 0,
-            value: parseFloat(this.$props.initialValue)
+            value: parseFloat(this.$props.initialValue),
+            font_size: this.$props.fontSize || "2em",
+            w: this.$props.size || 250,
+            h: this.$props.size || 250
         }
     },
     props: {
@@ -39,7 +47,9 @@ export default Vue.extend({
         id: String,
         radius: Number,
         fill: String,
-        strokeWidth: Number
+        strokeWidth: Number,
+        fontSize: String,
+        size: Number
     },
     mounted(){        
 

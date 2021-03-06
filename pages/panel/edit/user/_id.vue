@@ -1,7 +1,6 @@
 <template>
-    <client-only>
         <!-- TODO: (anche da backend) aggiungere route per modificare e/o aggiungere file -->
-        <section id="main" class="full">
+        <section id="main" class="full">    
                 <h1> Modifica utente </h1>
                 <div class="container" style="align-center">
                 <div style="width:100%;margin-left:auto;margin-right:auto">
@@ -23,7 +22,6 @@
                 </div>
             </div>
        </section>
-  </client-only>
 </template>
 <script lang="ts">
 import Vue from 'vue'

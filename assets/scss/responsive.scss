@@ -7,6 +7,30 @@
             width: 90%;
         }
     }
+    #counter{
+        display: none;
+    }
+    #cont{
+        width: 100% !important;
+        margin-right: 0 !important;
+    }
+    #panel-sidebar{
+        display: none;
+    }
+    #panel-layout{
+        width: 90% !important;
+    }
+    section{
+        &#main{
+            margin-left: 0 !important;
+        }
+    }
+    #index_menu{
+        display: block;
+    }
+    #back{
+        display: block;
+    }
 }
 @media screen and (max-width: 768px){
     #latest{

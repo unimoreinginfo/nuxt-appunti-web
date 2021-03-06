@@ -1,6 +1,12 @@
 <template>
         <!-- TODO: (anche da backend) aggiungere route per modificare e/o aggiungere file -->
         <section id="main" class="full">
+        <nuxt-link to="/panel/edit" id="back">
+            <div class="flexbox align-center" style="margin-bottom: 20px; background: #fefefe; max-width: 200px; width: 100%; padding-left: 10px; padding-right: 10px;">
+                <fa icon="arrow-alt-circle-left" style="font-size: 2em; color: #5352ed; margin-right: 20px;" /> <p style="color: #5352ed">Torna ai tuoi appunti</p>
+            </div>
+        </nuxt-link>
+        
             <Loading ref="spinner" />
                 <h1> Modifica post </h1>
                 <div class="container" style="align-center">

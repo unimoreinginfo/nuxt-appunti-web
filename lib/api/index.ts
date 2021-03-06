@@ -19,7 +19,9 @@ export const methods = {
 
         try{
 
-            await axios.post(`/bridge/cookies`, { token: auth_token, ref_token })
+            let uri = ((process.env.NODE_ENV === 'production') ? process.env.URI : 'http://localhost:3000');
+
+            await axios.post(`${uri}/bridge/cookies`, { token: auth_token, ref_token })
             return true;
         
         }catch(err){

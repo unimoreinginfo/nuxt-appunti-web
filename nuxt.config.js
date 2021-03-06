@@ -1,5 +1,8 @@
 export default {
     buildDir: 'beta.appunti.me',
+    env: {
+        URI: 'https://beta.appunti.me'
+    },
     // Global page headers: https://go.nuxtjs.dev/config-head
     head: {
         title: 'appunti.me',
@@ -65,7 +68,8 @@ export default {
                 'faCog',
                 'faSignOutAlt',
                 'faCircleNotch',
-                'faTrash'
+                'faTrash',
+                'faArrowAltCircleLeft'
             ]
         }
     },

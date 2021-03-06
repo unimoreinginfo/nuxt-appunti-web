@@ -1,14 +1,19 @@
-import client from '../lib/api';
+import client, { methods } from '../lib/api';
 
 export default async function (context) {
     
     if(!process.server)
         return;
 
-    let { route, req, store, redirect, app } = context;
+    let { route, req, store, redirect, app, res } = context;
     let route_redirect = route.path, route_name = route.name;
     let cookies = req.headers.cookie;
     let panel = route_redirect.split("/panel").length;
+
+    if(panel > 1)
+        store.commit('inPanel', true)
+    else
+        store.commit('inPanel', false)
     
     if(!cookies){
 
@@ -32,7 +37,7 @@ export default async function (context) {
     }
     
     try{
-
+    
         let response = await client.get('/auth/user', {
             headers: {
                 "Authorization": `Bearer ${auth_token.split("token=")[1]}`,
@@ -45,15 +50,45 @@ export default async function (context) {
         store.commit('setAuth', { auth_token: auth_token.split("token=")[1], ref_token: ref_token.split("ref_token=")[1] })
         store.commit('setUser', response.data.result);
 
-        if(route.name == 'login')
+        if(route_name == 'login')
             return redirect('/panel')
 
     }catch(err){
 
-        console.log(`client verification failed, bailing middleware and redirecting`);
-        store.commit('notLogged');
-        app.$cookies.removeAll();
-        redirect(`/login?to=${encodeURI(route_redirect)}`)
+        console.log(`client verification failed`);
+
+        if (err.response.status === 401 && Object.prototype.hasOwnProperty.call(err.response.data, "auth_token")){
+
+            console.log(`auth token expired, session can be recovered!`);
+            
+            app.$cookies.setAll([
+                {
+                    name: 'token',
+                    value: err.response.data["auth_token"],
+                    path: '/',
+                    maxAge: 31536000,
+                    httpOnly: true
+                },
+                {
+                    name: 'ref_token',
+                    value: ref_token.split("ref_token=")[1],
+                    path: '/',
+                    maxAge: 31536000,
+                    httpOnly: true
+                }
+            ])
+
+            store.commit('setAuth', { auth_token: err.response.data["auth_token"], ref_token: ref_token.split("ref_token=")[1] })
+            store.commit('setUser', err.response.data["user"])
+
+        }else{
+
+            console.log(`session is unrecoverable, bailing middleware`);
+            store.commit('notLogged');
+            app.$cookies.removeAll();
+            redirect(`/login?to=${encodeURI(route_redirect)}`)
+
+        }
 
     }
 

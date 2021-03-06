@@ -4,6 +4,7 @@ export const state = () => ({
         ref_token: null,
         is_logged: false
     },
+    in_panel: false,
     user: {} as any, // non mi va,
     uninitialized: true
 })
@@ -21,11 +22,17 @@ export const getters = {
     getUser(s: any){
         return s.user;
     },
-    getSecuredRoutes(s: any){
-        return s.secured_routes;
+    inPanel(s: any){
+        return s.in_panel;
     }
 }
 export const mutations = {
+
+    inPanel(s: any, state: boolean){
+
+        s.in_panel = state;
+
+    },
 
     setUser(s: any, user: any){
 

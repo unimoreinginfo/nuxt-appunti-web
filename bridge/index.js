@@ -6,7 +6,7 @@ app.use(bodyParser.json())
 app.use(cookieParser())
 
 app.post('/cookies', (req, res) => {
-    
+
     res.cookie('token', req.body.token, { 
         path: '/', 
         maxAge: 31536000, 
@@ -17,6 +17,7 @@ app.post('/cookies', (req, res) => {
         maxAge: 31536000, 
         httpOnly: true 
     });
+    
     return res.json(true);
 
 })
