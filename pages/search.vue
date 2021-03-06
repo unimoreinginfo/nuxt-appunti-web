@@ -42,6 +42,18 @@ import Vue from 'vue'
 import { methods } from '@/lib/api';
 import infiniteScrollComponent from '~/mixins/infinitescroll';
 export default Vue.extend({
+    head(){
+        return {
+            title: `appunti.me — risultati di ricerca per "${this.$data.q}"`,
+            meta: [
+                {
+                    hid: 'theme-color',
+                    name: 'theme-color',
+                    content: '#5352ed'
+                }
+            ]
+        }
+    },
     mixins: [
         infiniteScrollComponent()
     ],

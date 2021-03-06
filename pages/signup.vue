@@ -12,7 +12,7 @@
                         <input class="fancy" placeholder="Nome" type="text" style="width: 100%" v-model="name">
                         <input class="fancy" placeholder="Cognome" type="text" style="width: 100%" v-model="surname">
                     </div>
-                    <input class="fancy" placeholder="ID Unimore" type="text" style="width: 100%" v-model="unimore_id">
+                    <input class="fancy" placeholder="ID Unimore (il numero prima della mail istituzionale)" type="text" style="width: 100%" v-model="unimore_id">
                     <div class="flexbox justify-between align-center to-block" style="margin-bottom:20px">
                         <button class="fancy"> <span> Registrati </span> </button>
                         <span class="to-margin-top" style="font-family: 'DM Sans', sans-serif; color: #fefefe; display: block; max-width: 50%;">{{ message }}</span>
@@ -85,7 +85,12 @@ export default Vue.extend({
                     
                 }).catch((err: any) => {
 
-                    this.message = 'Si è verificato un errore durante la registrazione';
+                    if(err.response.status === 409){
+                        this.message = 'Questa mail è già registrata!'
+                        return;
+                    }
+
+                    this.message = 'Si è verificato un errore durante la registrazione, molto probabilmente l\'ID Unimore è già registrato';
                     console.log(err);
 
             })     

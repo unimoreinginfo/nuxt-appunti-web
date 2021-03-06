@@ -7,6 +7,7 @@
       <div id="desktop">
         <a href="/"><nav class="bright">home</nav></a>
         <a href="/subjects"><nav class="bright">materie disponibili</nav></a>
+        <a href="/about"><nav class="bright">about</nav></a>
         <a href="/login" v-if="!$store.getters.isLogged"><nav class="bright"><b>login</b></nav></a>
         <a href="/signup" v-if="!$store.getters.isLogged"><nav class="bright"><b>registrati</b></nav></a>
         <a href="/panel" v-if="$store.getters.isLogged"><nav class="bright"><b>il tuo profilo</b></nav></a>
@@ -20,6 +21,7 @@
         <ul>
             <li><a href="/"><nav class="bright">home</nav></a></li>
             <li><a href="/subjects"><nav class="bright">materie disponibili</nav></a></li>
+            <li><a href="/about"><nav class="bright">about</nav></a></li>
             <li><a href="/login" v-if="!$store.getters.isLogged"><nav class="bright"><b>login</b></nav></a></li>
             <li><a href="/signup" v-if="!$store.getters.isLogged"><nav class="bright"><b>registrati</b></nav></a></li>
             <li><a href="/panel" v-if="$store.getters.isLogged"><nav class="bright"><b>il tuo profilo</b></nav></a></li>
@@ -29,7 +31,8 @@
 </template>
 <script lang="ts">
 import Vue from 'vue'
-import { TimelineMax, Power2 } from 'gsap';
+import gsap, { TimelineMax, Power2, CSSPlugin } from 'gsap';
+gsap.registerPlugin(CSSPlugin);
 export default Vue.extend({
     data(){
         return {
@@ -77,7 +80,6 @@ export default Vue.extend({
             transform: 'translateY(0)',
             stagger: .1
         })
-        // this.timeline.to('.')
 
         this.timeline.reversed(true);
     }
