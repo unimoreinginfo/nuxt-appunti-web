@@ -57,22 +57,23 @@ export default Vue.extend({
             notes: []
         }
     },
-    async asyncData({ params, redirect }){
+    async asyncData({ params, error }){
         try{
 
             let notes = await methods.notes.get(`&subject_id=${params.id}&translate_subjects=true`);
             let subject = await methods.subjects.getSubject(parseInt(params.id));
 
             if(!subject)
-                return redirect('/404');
+                return error({ statusCode: 404 })
 
             return { notes, subject, filtered: [] }
 
         }catch(err){
-
-            // mettere un bel messaggio
-            console.log(err);
-            throw err;
+            
+            if(err.response.status === 404)
+                return error({ statusCode: 404 })
+            
+            return error({ statusCode: 500 })
 
         }
     },

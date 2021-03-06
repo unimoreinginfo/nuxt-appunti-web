@@ -45,7 +45,7 @@
                         </li>
                     </ul>
                 </div>
-        </div>
+            </div>
     </section>
 </template>
 <script lang="ts">
@@ -56,14 +56,14 @@ export default Vue.extend({
     mixins: [
         infiniteScrollComponent()
     ],
-    async asyncData({ params, redirect }){
+    async asyncData({ params, error }){
         try{
 
             let notes = await methods.notes.get(`&author_id=${params.id}&translate_subjects=true`);
             let author = await methods.users.get(params.id);
 
             if(author.error)
-                return redirect('/404');
+                return error({ statusCode: 404 })
 
             let random_stuff = "abcdefghijklmnopqrstuvwxyz";
             let split = author.email.split('');
@@ -83,13 +83,14 @@ export default Vue.extend({
 
             console.log(mail);
 
-            return { notes, author, mail, filtered: [] }
+            return { notes, author, mail, filtered: [], not_found: false, bad: false }
 
         }catch(err){
 
-            // mettere un bel messaggio
-            console.log(err);
-            throw err;
+            if(err.response.status === 404)
+                return error({ statusCode: 404 })
+            
+            return error({ statusCode: 500 })
 
         }
     },
