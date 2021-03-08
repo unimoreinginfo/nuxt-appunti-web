@@ -29,11 +29,7 @@ import { methods } from '@/lib/api';
 export default Vue.extend({
     head(){
         return {
-<<<<<<< HEAD
             title: `appunti.me — ${this.$data.item.info.title} di ${this.$data.item.info.name} ${this.$data.item.info.surname}`,
-=======
-            title: `appunti.me — ${this.$data.item.info.title}, di ${this.$data.item.info.name} ${this.$data.item.info.surname}`,
->>>>>>> 50ece6ee3b7c6efade28e1ae30be086c26f60076
             meta: [
                 {
                     hid: 'theme-color',
@@ -43,11 +39,7 @@ export default Vue.extend({
                 {
                     hid: 'title',
                     name: 'title',
-<<<<<<< HEAD
                     content: `appunti.me — ${this.$data.item.info.title} di ${this.$data.item.info.name} ${this.$data.item.info.surname}`
-=======
-                    content: `appunti.me — ${this.$data.item.info.title}, di ${this.$data.item.info.name} ${this.$data.item.info.surname}`
->>>>>>> 50ece6ee3b7c6efade28e1ae30be086c26f60076
                 },
                 {
                     hid: 'description',
@@ -67,11 +59,7 @@ export default Vue.extend({
                 {
                     hid: 'og:title',
                     property: 'og:title',
-<<<<<<< HEAD
                     content: `appunti.me — ${this.$data.item.info.title} di ${this.$data.item.info.name} ${this.$data.item.info.surname}`
-=======
-                    content: `appunti.me — ${this.$data.item.info.title}, di ${this.$data.item.info.name} ${this.$data.item.info.surname}`
->>>>>>> 50ece6ee3b7c6efade28e1ae30be086c26f60076
                 },
                 {
                     hid: 'og:description',
@@ -91,11 +79,7 @@ export default Vue.extend({
                 {
                     hid: 'twitter:title',
                     property: 'og:title',
-<<<<<<< HEAD
                     content: `appunti.me — ${this.$data.item.info.title} di ${this.$data.item.info.name} ${this.$data.item.info.surname}`
-=======
-                    content: `appunti.me — ${this.$data.item.info.title}, di ${this.$data.item.info.name} ${this.$data.item.info.surname}`
->>>>>>> 50ece6ee3b7c6efade28e1ae30be086c26f60076
                 },
                 {
                     hid: 'twitter:description',
