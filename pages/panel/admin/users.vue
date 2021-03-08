@@ -44,11 +44,12 @@ export default Vue.extend({
     data: () => {
         return {
             userPages: 1,
+            load:true,
             loadedPage: 1,
             users: []
         };
     },
-    async created(){
+    async beforeMount () {
         try {
             let ret = await (this as any).$api.methods.users.getPage(1, true);
             this.$data.users = ret.result;
@@ -56,8 +57,6 @@ export default Vue.extend({
         } catch(err) {
             console.log(err);
         }
-    },
-    beforeMount () {
         window.addEventListener('scroll', this.onscroll);
     },
     beforeDestroy() {
@@ -67,7 +66,7 @@ export default Vue.extend({
         // roba infinite scroll
         addUserPages(page: number) {
             console.log(`loading page ${page}`);
-            (this as any).$api.users.get(page, false).then((data: any) => {
+            (this as any).$api.methods.users.getPage(page, false).then((data: any) => {
                 this.$data.users=this.$data.users.concat(data);
                 
             });

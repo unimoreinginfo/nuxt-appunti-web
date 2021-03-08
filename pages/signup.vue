@@ -12,7 +12,7 @@
                         <input class="fancy" placeholder="Nome" type="text" style="width: 100%" v-model="name">
                         <input class="fancy" placeholder="Cognome" type="text" style="width: 100%" v-model="surname">
                     </div>
-                    <input class="fancy" placeholder="ID Unimore" type="text" style="width: 100%" v-model="unimore_id">
+                    <input class="fancy" placeholder="ID Unimore (il numero prima della mail istituzionale)" type="text" style="width: 100%" v-model="unimore_id">
                     <div class="flexbox justify-between align-center to-block" style="margin-bottom:20px">
                         <button class="fancy"> <span> Registrati </span> </button>
                         <span class="to-margin-top" style="font-family: 'DM Sans', sans-serif; color: #fefefe; display: block; max-width: 50%;">{{ message }}</span>
@@ -33,11 +33,66 @@ import { methods } from '@/lib/api'
 
 export default Vue.extend({
     head(){
-
         return {
             title: 'appunti.me — registrati',
-        } 
-
+            meta: [
+                {
+                    hid: 'theme-color',
+                    name: 'theme-color',
+                    content: '#5352ed'
+                },
+                {
+                    hid: 'title',
+                    name: 'title',
+                    content: 'appunti.me — registrati'
+                },
+                {
+                    hid: 'description',
+                    name: 'description',
+                    content: 'la piattaforma di appunti completamente open source!'
+                },
+                {
+                    hid: 'og:type',
+                    property: 'og:type',
+                    content: 'website'
+                },
+                {
+                    hid: 'og:url',
+                    property: 'og:url',
+                    content: `${process.env.URI}${this.$route.fullPath}`
+                },
+                {
+                    hid: 'og:title',
+                    property: 'og:title',
+                    content: `appunti.me — registrati`
+                },
+                {
+                    hid: 'og:description',
+                    property: 'og:description',
+                    content: 'la piattaforma di appunti completamente open source!'
+                }, 
+                {
+                    hid: 'twitter:card',
+                    property: 'twitter:card',
+                    content: 'summary_large_image'
+                },
+                {
+                    hid: 'twitter:url',
+                    property: 'twitter:url',
+                    content: `${process.env.URI}${this.$route.fullPath}`
+                },
+                {
+                    hid: 'twitter:title',
+                    property: 'og:title',
+                    content: `appunti.me — registrati`
+                },
+                {
+                    hid: 'twitter:description',
+                    property: 'og:description',
+                    content: 'la piattaforma di appunti completamente open source!'
+                }                               
+            ]
+        }
     },
     data() {
         return {
@@ -85,7 +140,12 @@ export default Vue.extend({
                     
                 }).catch((err: any) => {
 
-                    this.message = 'Si è verificato un errore durante la registrazione';
+                    if(err.response.status === 409){
+                        this.message = 'Questa mail è già registrata!'
+                        return;
+                    }
+
+                    this.message = 'Si è verificato un errore durante la registrazione, molto probabilmente l\'ID Unimore è già registrato';
                     console.log(err);
 
             })     

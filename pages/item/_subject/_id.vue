@@ -27,18 +27,81 @@
 import Vue from 'vue'
 import { methods } from '@/lib/api';
 export default Vue.extend({
-    async asyncData({ params }){
+    head(){
+        return {
+            title: `appunti.me — ${this.$data.item.info.title} di ${this.$data.item.info.name} ${this.$data.item.info.surname}`,
+            meta: [
+                {
+                    hid: 'theme-color',
+                    name: 'theme-color',
+                    content: '#5352ed'
+                },
+                {
+                    hid: 'title',
+                    name: 'title',
+                    content: `appunti.me — ${this.$data.item.info.title} di ${this.$data.item.info.name} ${this.$data.item.info.surname}`
+                },
+                {
+                    hid: 'description',
+                    name: 'description',
+                    content: 'la piattaforma di appunti completamente open source!'
+                },
+                {
+                    hid: 'og:type',
+                    property: 'og:type',
+                    content: 'website'
+                },
+                {
+                    hid: 'og:url',
+                    property: 'og:url',
+                    content: `${process.env.URI}${this.$route.fullPath}`
+                },
+                {
+                    hid: 'og:title',
+                    property: 'og:title',
+                    content: `appunti.me — ${this.$data.item.info.title} di ${this.$data.item.info.name} ${this.$data.item.info.surname}`
+                },
+                {
+                    hid: 'og:description',
+                    property: 'og:description',
+                    content: 'la piattaforma di appunti completamente open source!'
+                }, 
+                {
+                    hid: 'twitter:card',
+                    property: 'twitter:card',
+                    content: 'summary_large_image'
+                },
+                {
+                    hid: 'twitter:url',
+                    property: 'twitter:url',
+                    content: `${process.env.URI}${this.$route.fullPath}`
+                },
+                {
+                    hid: 'twitter:title',
+                    property: 'og:title',
+                    content: `appunti.me — ${this.$data.item.info.title} di ${this.$data.item.info.name} ${this.$data.item.info.surname}`
+                },
+                {
+                    hid: 'twitter:description',
+                    property: 'og:description',
+                    content: 'la piattaforma di appunti completamente open source!'
+                }                               
+            ]
+        }
+    },
+    async asyncData({ params, error }){
         try{
 
             let item = await methods.notes.getNote(params.id, parseInt(params.subject)),
                 date = new Date(item.info.uploaded_at);
-            return { item, date: date.toLocaleDateString(), time: date.toLocaleTimeString() }
+            return { item, date: date.toLocaleDateString(), time: date.toLocaleTimeString(), not_found: false, bad: false }
 
-        }catch(err){
+        }catch(err){           
 
-            // mettere un bel messaggio
-            console.log(err);
-            throw err;
+            if(err.response.status === 404)
+                return error({ statusCode: 404 })
+            
+            return error({ statusCode: 500 })
 
         }
     }

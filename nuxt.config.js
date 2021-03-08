@@ -1,7 +1,7 @@
 export default {
-    buildDir: 'beta.appunti.me',
+    buildDir: 'appunti.me',
     env: {
-        URI: 'https://beta.appunti.me'
+        URI: 'https://appunti.me'
     },
     // Global page headers: https://go.nuxtjs.dev/config-head
     head: {
