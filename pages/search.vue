@@ -2,6 +2,12 @@
     <section>
         <div class="container" style="margin: 0 auto; margin-top: 120px;">
             <h1 class="main" id="title"> Risultati di ricerca per "{{ q }}" </h1>
+            <form>
+                <div class="flexbox" style="align-items: flex-start;" id="main_form">
+                    <SimulatedSelect ref="select_subject" right-icon="chevron-down" placeholder="Seleziona materia" data-id="select1" :items="getSubjects" />
+                    <Searchbar ref="searchbar" model="fancy full-width" id="search" placeholder="Che cosa stai cercando?" :searchAction="getNotes" :disable-results="false" :timeout="true" outer-style="width: 100%; margin: 0 auto;" result-model="bright h100 hover-darken-blue" result-holder-model="absolute" :searchPageUrlGen="generateSearchPageUrl" />
+                </div>
+            </form>
             <div class="flexbox align-top justify-center wrap" style="margin-top: 80px; width: 100%;">
                 <div style="width: 100%; margin-top: -100px;">
                     <ul class="fancy-list" style="width: 100%;">
@@ -57,6 +63,49 @@ export default Vue.extend({
         }
     },
     methods: {
+        async getSubjects(){
+            
+            try{
+
+                return await methods.subjects.getSubjects()
+
+            }catch(err){
+
+                console.log(err);
+                throw err;
+
+            }
+            
+        },
+        async getNotes(){
+
+            let query = (this as any).$refs.searchbar.query,
+                subject = (this as any).$refs.select_subject.selected_value;
+            
+            try{
+                
+                let items = await methods.notes.searchNotes(query, subject);
+                items.forEach((item: any) => {
+                    item["url"] = `/item/${item.subject_id}/${item.id}` 
+                });
+                console.log(items);
+                
+                return items;
+
+            }catch(err){
+
+                console.log(err);
+                throw err;
+
+            }
+
+        },
+        generateSearchPageUrl() {
+            let query = (this as any).$refs.searchbar.query,
+                subject = (this as any).$refs.select_subject.selected_value;
+
+            return `/search?q=${query}&subject_id=${subject ? subject : 'any'}`
+        },
         async getFirstPage () {
             return await methods.notes.searchNotes(this.$data.q, this.$data.subject_id, this.$data.author_id, 1, true);
         },

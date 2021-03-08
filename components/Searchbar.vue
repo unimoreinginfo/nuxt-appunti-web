@@ -1,5 +1,5 @@
 <template>
-    <div :id="$props.id" :style="$props.outerStyle">
+    <div :id="$props.id" :style="$props.outerStyle" style="position: relative;">
         <input type="text" :placeholder="$props.placeholder" :class="$props.model" @input="search()" v-model="query">
         <ul class="result-holder" :class=[$props.resultHolderModel]>
             <li v-for="result in items" :key="result.id" :class="['result', $props.resultModel]">
@@ -85,6 +85,8 @@ export default Vue.extend({
         background: $blue;
         &.absolute{
             position: absolute;
+            z-index: 20;
+            box-shadow: 0 14px 28px rgba(0,0,0,0.05), 0 10px 10px rgba(0,0,0,0.07);
         }
         width: 100%;
         overflow: auto;

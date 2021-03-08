@@ -27,18 +27,31 @@
 import Vue from 'vue'
 import { methods } from '@/lib/api';
 export default Vue.extend({
-    async asyncData({ params }){
+    head(){
+        return {
+            title: `appunti.me — (${this.$data.item.info.subject_name}) ${this.$data.item.info.title}`,
+            meta: [
+                {
+                    hid: 'theme-color',
+                    name: 'theme-color',
+                    content: '#5352ed'
+                }
+            ]
+        }
+    },
+    async asyncData({ params, error }){
         try{
 
             let item = await methods.notes.getNote(params.id, parseInt(params.subject)),
                 date = new Date(item.info.uploaded_at);
-            return { item, date: date.toLocaleDateString(), time: date.toLocaleTimeString() }
+            return { item, date: date.toLocaleDateString(), time: date.toLocaleTimeString(), not_found: false, bad: false }
 
-        }catch(err){
+        }catch(err){           
 
-            // mettere un bel messaggio
-            console.log(err);
-            throw err;
+            if(err.response.status === 404)
+                return error({ statusCode: 404 })
+            
+            return error({ statusCode: 500 })
 
         }
     }
