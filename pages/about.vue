@@ -14,3 +14,70 @@
         </div>
     </section>
 </template>
+<script lang="ts">
+import Vue from 'vue'
+export default Vue.extend({
+    head(){
+        return {
+            title: 'appunti.me — about',
+            meta: [
+                {
+                    hid: 'theme-color',
+                    name: 'theme-color',
+                    content: '#5352ed'
+                },
+                {
+                    hid: 'title',
+                    name: 'title',
+                    content: 'appunti.me — about'
+                },
+                {
+                    hid: 'description',
+                    name: 'description',
+                    content: 'la piattaforma di appunti completamente open source!'
+                },
+                {
+                    hid: 'og:type',
+                    property: 'og:type',
+                    content: 'website'
+                },
+                {
+                    hid: 'og:url',
+                    property: 'og:url',
+                    content: `${process.env.URI}${this.$route.fullPath}`
+                },
+                {
+                    hid: 'og:title',
+                    property: 'og:title',
+                    content: `appunti.me — about`
+                },
+                {
+                    hid: 'og:description',
+                    property: 'og:description',
+                    content: 'la piattaforma di appunti completamente open source!'
+                }, 
+                {
+                    hid: 'twitter:card',
+                    property: 'twitter:card',
+                    content: 'summary_large_image'
+                },
+                {
+                    hid: 'twitter:url',
+                    property: 'twitter:url',
+                    content: `${process.env.URI}${this.$route.fullPath}`
+                },
+                {
+                    hid: 'twitter:title',
+                    property: 'og:title',
+                    content: `appunti.me — about`
+                },
+                {
+                    hid: 'twitter:description',
+                    property: 'og:description',
+                    content: 'la piattaforma di appunti completamente open source!'
+                }                               
+            ]
+        }
+    }
+})
+</script>

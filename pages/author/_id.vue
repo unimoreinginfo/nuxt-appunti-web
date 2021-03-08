@@ -53,6 +53,68 @@ import Vue from 'vue'
 import { methods } from '@/lib/api';
 import infiniteScrollComponent from '~/mixins/infinitescroll';
 export default Vue.extend({
+    head(){
+        return {
+            title: `appunti.me — appunti di ${this.$data.author.name}`,
+            meta: [
+                {
+                    hid: 'theme-color',
+                    name: 'theme-color',
+                    content: '#5352ed'
+                },
+                {
+                    hid: 'title',
+                    name: 'title',
+                    content: `appunti.me — appunti di ${this.$data.author.name}`
+                },
+                {
+                    hid: 'description',
+                    name: 'description',
+                    content: 'la piattaforma di appunti completamente open source!'
+                },
+                {
+                    hid: 'og:type',
+                    property: 'og:type',
+                    content: 'website'
+                },
+                {
+                    hid: 'og:url',
+                    property: 'og:url',
+                    content: `${process.env.URI}${this.$route.fullPath}`
+                },
+                {
+                    hid: 'og:title',
+                    property: 'og:title',
+                    content: `appunti.me — appunti di ${this.$data.author.name}`
+                },
+                {
+                    hid: 'og:description',
+                    property: 'og:description',
+                    content: 'la piattaforma di appunti completamente open source!'
+                }, 
+                {
+                    hid: 'twitter:card',
+                    property: 'twitter:card',
+                    content: 'summary_large_image'
+                },
+                {
+                    hid: 'twitter:url',
+                    property: 'twitter:url',
+                    content: `${process.env.URI}${this.$route.fullPath}`
+                },
+                {
+                    hid: 'twitter:title',
+                    property: 'og:title',
+                    content: `appunti.me — appunti di ${this.$data.author.name}`
+                },
+                {
+                    hid: 'twitter:description',
+                    property: 'og:description',
+                    content: 'la piattaforma di appunti completamente open source!'
+                }                               
+            ]
+        }
+    },
     mixins: [
         infiniteScrollComponent()
     ],
@@ -123,12 +185,6 @@ export default Vue.extend({
                 throw err;
 
             }
-
-            /*this.$data.filtered = this.$data.subjects.filter(( item: any ) => {
-
-                return item.name.toLowerCase().includes((this.$refs.searchbar as any).query.toLowerCase())
-            
-            })*/
 
         }
     }
