@@ -9,6 +9,7 @@
             <a href="/panel/upload"><li class="flexbox justify-between"> <fa icon="upload" class="right" /> Carica appunti </li></a>
             <a href="/panel/edit"><li class="flexbox justify-between"> <fa icon="edit" class="right" /> Tutti i tuoi appunti</li></a> 
             <a href="/panel/settings"><li class="flexbox justify-between"> <fa icon="cog" class="right" /> Impostazioni profilo </li></a>
+            <a href="/panel/developer"><li class="flexbox justify-between"> <fa icon="cog" class="right" /> Pannello developer </li></a>
             <li @click="logout" class="flexbox justify-between"> <fa icon="sign-out-alt" class="right" /> Logout </li>
         </ul>
         <div class="flexbox align-top" style="margin-top: 50px; width: 100%;">
@@ -81,7 +82,7 @@ export default Vue.extend({
 
         }catch(err){
 
-            console.log(err.response);
+            console.log((err as any).response);
 
         }
 

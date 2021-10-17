@@ -8,6 +8,7 @@
                 <a href="/panel/upload"><li> <fa icon="upload" class="right" /> Carica appunti </li></a>
                 <a href="/panel/edit"><li> <fa icon="edit" class="right" /> Tutti i tuoi appunti</li></a> 
                 <a href="/panel/settings"><li> <fa icon="cog" class="right" /> Impostazioni profilo </li></a>
+                <a href="/panel/developer"><li> <fa icon="cog" class="right" /> Pannello developer </li></a>
                 <li @click="logout"> <fa icon="sign-out-alt" class="right" /> Logout </li>
             </ul>
         </div>

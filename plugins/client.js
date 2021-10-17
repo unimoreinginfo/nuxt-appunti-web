@@ -141,7 +141,7 @@ let methods = {
         },
         async edit(oldSub, id, newSub, newTitle) {
             try {
-                await client.post(`/notes/${oldSub}/${id}`, {
+                    await client.post(`/notes/${oldSub}/${id}`, {
                     title: newTitle,
                     new_subject_id: newSub
                 });
@@ -172,6 +172,19 @@ let methods = {
                 throw err;
             }
         }    
+    },
+    webhooks: {
+        notes: {
+            async create(title, url) {
+                
+                let response = await client.post('/webhooks/notes/register/', {webhook_title:title, webhook_url:url})
+                return response.data
+            },
+            async list() {
+                let response = await client.get('/webhooks/notes')
+                return response.data
+            } 
+        }
     },
 }
 
